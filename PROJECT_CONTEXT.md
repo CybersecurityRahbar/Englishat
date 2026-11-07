@@ -92,9 +92,10 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - No recorded native audio assets, speech-recognition assessment, pronunciation scoring, listening passages, writing correction, placement test, user accounts, cloud sync, or content management backend yet.
 - Browser speech synthesis has been replaced with Android TextToSpeech. Voice availability and quality depend on the device's installed English voice data.
 - Textbook-derived content needs ownership/licensing review and editorial QA.
-- The first GitHub Actions run (2026-11-07, run 42373948824) stopped in the Android SDK setup action before Gradle ran: that action tried to install the obsolete SDK package `tools`, which is no longer published. The workflow was changed to request only `platform-tools` from the setup action.
-- The second run (ID 42374071869) passed checkout, Java, Gradle, and Android SDK setup, but failed because this runner's SDK repository did not contain `platforms;android-37`. The Gradle build step was skipped. The app's compile SDK and CI package request were therefore changed to the available stable Android 36 platform, while targetSdk and build-tools remain at 36.
-- Neither failed run reached Kotlin compilation; compilation and APK generation are still unverified.
+- The first GitHub Actions run (2026-11-07, run 42373948824) stopped during Android SDK setup because the action's default package list requested the retired SDK package `tools`; fixed by explicitly requesting only `platform-tools` from the setup action.
+- The second run (ID 42374071869) passed Android SDK setup but the runner's repository did not expose `platforms;android-37`; changed `compileSdk` and CI installation to Android 36.
+- The third run (ID 42374146211) installed Android 36 successfully and reached Gradle, then failed applying `org.jetbrains.kotlin.android`: AGP 9 already provides built-in Kotlin, so applying that separate plugin caused the duplicate `kotlin` extension error. Removed the redundant Kotlin Android plugin from both root and app build files, and removed the deprecated `android.kotlinOptions` block. AGP's built-in Kotlin default JVM target follows Java `targetCompatibility`.
+- The Android official migration guide was followed: https://developer.android.com/build/migrate-to-built-in-kotlin. APK compilation remains unverified until the next run succeeds.
 - Add automated unit/UI tests and accessibility checks.
 - Expand lessons and CEFR can-do objectives; add spaced-repetition scheduling for vocabulary; add listening and speaking practice.
 - Design later A2/B1 content only after A1 content is reviewed and assessed.
@@ -121,3 +122,13 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - The explicit SDK install then failed with `Failed to find package 'platforms;android-37'`; no Gradle build was attempted.
 - To align the build with an SDK platform actually available from the runner's configured repository, changed `compileSdk` and the CI SDK install to Android 36. `targetSdk` and Build Tools stay at 36.
 - The next Actions run must establish whether Android 36 installs successfully and expose any real Kotlin or dependency compilation errors.
+
+
+## 10. AGP 9 built-in Kotlin migration — 2026-11-07
+
+- Third CI run (ID 42374146211) passed Android SDK package installation and reached Gradle.
+- Gradle failed while applying `org.jetbrains.kotlin.android` with: `Cannot add extension with name 'kotlin', as there is an extension already registered with that name.`
+- Root cause confirmed against Android's current migration guide: AGP 9.0+ includes Kotlin support by default; the separate `org.jetbrains.kotlin.android` plugin conflicts with it. Removed that plugin from root and app plugin declarations. Retained `org.jetbrains.kotlin.plugin.compose` 2.2.10 to configure the Compose compiler.
+- Removed the old `android.kotlinOptions` configuration. The Java target is 17; AGP built-in Kotlin defaults its JVM target to `android.compileOptions.targetCompatibility`.
+- Official reference: https://developer.android.com/build/migrate-to-built-in-kotlin
+- The next CI run must confirm that Gradle configuration, dependency resolution, Kotlin compilation, packaging, and APK artifact upload all succeed.
