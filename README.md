@@ -15,7 +15,7 @@ Englishat is an Arabic-first Android app for learning English through short less
 
 ## Build
 
-Open the repository in a recent Android Studio installation with JDK 17 and Android SDK Platform 36 installed. The project uses Android Gradle Plugin 9.1.1 with built-in Kotlin support, Gradle 9.3.1, the Kotlin Compose compiler plugin 2.2.10, and Compose BOM 2026.09.00.
+Open the repository in a recent Android Studio installation with JDK 17 and Android SDK Platform 36 installed. The project uses Android Gradle Plugin 9.1.1 with built-in Kotlin support, Gradle 9.3.1, the Kotlin Compose compiler plugin 2.2.10, and Compose BOM 2026.06.01.
 
 The GitHub Actions workflow installs Gradle directly and runs:
 

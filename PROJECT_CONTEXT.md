@@ -94,8 +94,9 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - Textbook-derived content needs ownership/licensing review and editorial QA.
 - The first GitHub Actions run (2026-11-07, run 42373948824) stopped during Android SDK setup because the action's default package list requested the retired SDK package `tools`; fixed by explicitly requesting only `platform-tools` from the setup action.
 - The second run (ID 42374071869) passed Android SDK setup but the runner's repository did not expose `platforms;android-37`; changed `compileSdk` and CI installation to Android 36.
-- The third run (ID 42374146211) installed Android 36 successfully and reached Gradle, then failed applying `org.jetbrains.kotlin.android`: AGP 9 already provides built-in Kotlin, so applying that separate plugin caused the duplicate `kotlin` extension error. Removed the redundant Kotlin Android plugin from both root and app build files, and removed the deprecated `android.kotlinOptions` block. AGP's built-in Kotlin default JVM target follows Java `targetCompatibility`.
-- The Android official migration guide was followed: https://developer.android.com/build/migrate-to-built-in-kotlin. APK compilation remains unverified until the next run succeeds.
+- The third run (ID 42374146211) installed Android 36 and reached Gradle, then failed applying `org.jetbrains.kotlin.android`: AGP 9 already provides built-in Kotlin, so the extra plugin caused a duplicate `kotlin` extension. Removed the redundant plugin from root and app build files and removed the deprecated `android.kotlinOptions` block. AGP built-in Kotlin defaults its JVM target to Java `targetCompatibility`.
+- The fourth run (ID 42374327528) passed Gradle configuration and SDK installation. Its dependency metadata check then showed that Compose 1.12.1 (BOM 2026.09.00) requires compileSdk 37, while the runner's stable SDK repository only supplied platform 36. Kotlin source compilation ran with deprecation warnings, not Kotlin errors. Switched to the prior stable Compose BOM 2026.06.01 (Compose 1.11.4 release line) to keep the app on stable API 36 and removed the deprecated non-mirrored MenuBook/VolumeUp icon references.
+- Android's current Compose guidance states that Compose 1.12.0+ requires compileSdk 37; the August 2026 release notes confirm the requirement. References: https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler and https://android-developers.googleblog.com/2026/08/jetpack-compose-august-2026-release.html. APK packaging remains unverified until the next run succeeds.
 - Add automated unit/UI tests and accessibility checks.
 - Expand lessons and CEFR can-do objectives; add spaced-repetition scheduling for vocabulary; add listening and speaking practice.
 - Design later A2/B1 content only after A1 content is reviewed and assessed.
@@ -132,3 +133,12 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - Removed the old `android.kotlinOptions` configuration. The Java target is 17; AGP built-in Kotlin defaults its JVM target to `android.compileOptions.targetCompatibility`.
 - Official reference: https://developer.android.com/build/migrate-to-built-in-kotlin
 - The next CI run must confirm that Gradle configuration, dependency resolution, Kotlin compilation, packaging, and APK artifact upload all succeed.
+
+
+## 11. Compose/API-level compatibility — 2026-11-07
+
+- Fourth run (ID 42374327528) confirmed SDK 36 installation and AGP built-in Kotlin configuration now work.
+- The build then failed at `:app:checkDebugAarMetadata`: the Compose 1.12.1 artifacts selected by BOM 2026.09.00 require `compileSdk 37`; runner stable SDK repository has Android 36 platform only. The Kotlin source compilation task emitted warnings about non-auto-mirrored icons but no Kotlin source errors.
+- Changed the Compose BOM to `2026.06.01`, from the stable Compose 1.11.4 line, which predates the Compose 1.12/API 37 requirement. Kept `compileSdk 36` and `targetSdk 36`.
+- Replaced `Icons.Filled.MenuBook` and `Icons.Filled.VolumeUp` with AutoMirrored variants to avoid RTL-direction deprecation warnings.
+- The next workflow run must verify dependency metadata, source compilation, APK packaging, and artifact upload.

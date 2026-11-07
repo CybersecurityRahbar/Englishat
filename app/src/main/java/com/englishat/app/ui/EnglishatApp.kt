@@ -25,6 +25,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -78,7 +80,7 @@ import com.englishat.app.data.VocabularyWord
 
 private enum class AppTab(val label: String, val icon: ImageVector) {
     Home("الرئيسية", Icons.Filled.Home),
-    Learn("التعلّم", Icons.Filled.MenuBook),
+    Learn("التعلّم", Icons.AutoMirrored.Filled.MenuBook),
     Practice("التدريب", Icons.Filled.School),
     Words("الكلمات", Icons.Filled.Translate),
     Profile("حسابي", Icons.Filled.Person)
@@ -380,7 +382,7 @@ private fun LessonDetailScreen(
                             Text(example.arabic, color = Color(0xFF7B879B), fontSize = 12.sp)
                         }
                         OutlinedButton(onClick = { onSpeak(example.english) }, contentPadding = PaddingValues(horizontal = 10.dp, vertical = 5.dp)) {
-                            Icon(Icons.Filled.VolumeUp, contentDescription = "استمع", modifier = Modifier.size(18.dp))
+                            Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "استمع", modifier = Modifier.size(18.dp))
                         }
                     }
                 }
