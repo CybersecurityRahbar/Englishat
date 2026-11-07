@@ -197,3 +197,14 @@ The user tested the first APK and approved the direction as a good start. This i
 - APK SHA-256: `b73243bdfd01356533b4b68ff71e038d16bb3b5f73b88febfe0c068d88cec5b5`.
 - Version code is now 2 and version name is 0.2.0. A device-side update-install and runtime test is still outstanding.
 - The APK was built successfully, but no claim is made yet about matching the signing certificate of the earlier 0.1.0 artifact. A one-time CI signature comparison has been added to verify update compatibility before advising installation over the previous version.
+
+
+## 15. Debug APK signing compatibility — 2026-11-07
+
+- The CI signature comparison was completed against the previous 0.1.0 artifact (run `42374515936`) and the first 0.2.0 artifact (run `42379465477`).
+- The certificates were different: previous 0.1.0 SHA-256 `23754e940baaf701df67a7d72eab3b69e0c94ba84ec5bc4566a786b08849fd4a`; first 0.2.0 SHA-256 `cb526c2d5209ee7e2d546beb2038243833de368001d32482e3c3ab74be3ca04c`.
+- Therefore Android cannot install that first 0.2.0 APK as an in-place update over the 0.1.0 install. Package Manager will reject it due to signing-certificate mismatch. Do not claim update compatibility or advise uninstalling if local progress must be preserved.
+- Root cause: CI's default debug signing key is generated or supplied per build runner and was not kept stable between workflows.
+- Added a dedicated development-only signing keystore to the repository and configured the debug build to use it consistently. New builds from this change onward will share certificate SHA-256 `04deaa0d685dc6473cd33e6283095dbe25fab86053c8e2e7abd72642a381cf19`. This keystore is public/test-only and must never be used for a production release.
+- The 0.1.0 → stable-signed 0.2.0 transition still needs a one-time clean install because the original private key is not available for the first CI artifact. The user's old app data may be deleted by uninstall; warn before asking them to do that. Once the stable-signed 0.2.0 build is installed, future builds can update in place.
+- Added an Android CI check that fails unless the produced debug APK has the expected stable certificate.
