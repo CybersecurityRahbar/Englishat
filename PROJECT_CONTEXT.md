@@ -142,3 +142,16 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - Changed the Compose BOM to `2026.06.01`, from the stable Compose 1.11.4 line, which predates the Compose 1.12/API 37 requirement. Kept `compileSdk 36` and `targetSdk 36`.
 - Replaced `Icons.Filled.MenuBook` and `Icons.Filled.VolumeUp` with AutoMirrored variants to avoid RTL-direction deprecation warnings.
 - The next workflow run must verify dependency metadata, source compilation, APK packaging, and artifact upload.
+
+
+## 12. First successful Android build — 2026-11-07
+
+- Successful Actions run: `42374515936` — [Build result](https://github.com/CybersecurityRahbar/Englishat/actions/runs/42374515936).
+- Branch commit built: `2eac6d034eb34fa79ae2e6e387294a12614d7b82`.
+- All main workflow steps completed successfully: checkout, Java 17, Gradle 9.3.1, Android SDK setup, Android 36 / Build Tools 36 installation, `:app:assembleDebug`, and artifact upload.
+- GitHub Actions artifact: `englishat-debug-apk` (artifact ID `13575431211`), ZIP size 18,814,438 bytes, retained until 2026-11-21T12:56:02Z.
+- Downloaded and inspected the workflow ZIP in the working environment. It contains `app-debug.apk` (19,423,252 bytes). ZIP integrity check passed; file was identified as an Android APK.
+- APK SHA-256: `c8d862b429ebf476ad8384e95905dfcc1890e526cc5639400baa408fcc419c83`.
+- Artifact ZIP SHA-256: `f5a8f7f6811f581b235ca3c3705b623117d5b01f6813920097bfec4061fe38c8`.
+- This confirms a successful debug APK build and artifact upload. It does not yet constitute an emulator/device installation test, UI interaction test, or release-signed APK.
+- Future next steps: install the debug APK on a test Android device; verify RTL layout, TTS voice, lesson completion/favorites/progress persistence, and practice scoring; then improve the lesson/curriculum depth, add the full prototype vocabulary after editorial QA, build spaced repetition and listening/speaking exercises, and add automated tests. Add a Gradle Wrapper so local builds do not depend on manually installed Gradle.
