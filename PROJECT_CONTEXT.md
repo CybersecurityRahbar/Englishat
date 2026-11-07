@@ -155,3 +155,33 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - Artifact ZIP SHA-256: `f5a8f7f6811f581b235ca3c3705b623117d5b01f6813920097bfec4061fe38c8`.
 - This confirms a successful debug APK build and artifact upload. It does not yet constitute an emulator/device installation test, UI interaction test, or release-signed APK.
 - Future next steps: install the debug APK on a test Android device; verify RTL layout, TTS voice, lesson completion/favorites/progress persistence, and practice scoring; then improve the lesson/curriculum depth, add the full prototype vocabulary after editorial QA, build spaced repetition and listening/speaking exercises, and add automated tests. Add a Gradle Wrapper so local builds do not depend on manually installed Gradle.
+
+
+## 13. Product expansion and brand refresh — 2026-11-07
+
+The user tested the first APK and approved the direction as a good start. This iteration responds to the request for a more advanced and competitive experience, removal of the white sparkle/Gemini-like mark, and a proper application icon.
+
+### Brand and UI
+- Removed the white sparkle character from the Englishat in-app hero wordmark.
+- Added a native Android adaptive launcher icon: an original open-book mark paired with a small conversation bubble, on a navy background with gold and blue accents. No third-party logo or copied sparkle is used.
+- Bumped the app to versionName 0.2.0 / versionCode 2 to support update-install over the previous build when signed with the same CI debug key.
+
+### Learning improvements
+- Expanded the A1 path from four to eight lessons: Present Simple, Have/Has, Question Words, and Prepositions of Place were added with Arabic explanations, contextual English examples, and takeaways.
+- Added 24 curated vocabulary entries covering routines, verbs, home items, time expressions, and place prepositions. Existing prototype-derived vocabulary remains subject to editorial QA before bulk import.
+- Expanded the practice question pool from eight to sixteen items.
+- Added daily flashcard review with batches of up to ten due/new words. Learners reveal the meaning and example, listen to pronunciation, and rate recall as difficult, remembered, or easy.
+- Review state is persisted locally in Preferences DataStore. Successful recall increases intervals; difficult words are scheduled to return the same day.
+- These additions remain offline-first; no account or server dependency was introduced.
+
+### Research reviewed for this iteration
+- Duolingo emphasizes short lessons, progress rewards, habit loops, and practice across reading, writing, listening, and speaking: https://www.duolingo.com/learn
+- Busuu's February 2026 support article describes scenario-based speaking practice linked to CEFR levels: https://help.busuu.com/hc/en-us/articles/21862192336402-What-are-Busuu-Conversations-and-how-can-they-help-me-learn-a-language
+- British Council Yemen's app catalogue highlights grammar, videos/listening, pronunciation, podcasts with transcripts, vocabulary, and timed quizzes: https://yemen.britishcouncil.org/en/english/apps
+- British Council LearnEnglish Grammar describes practice tasks including fill-in-the-blanks, word ordering, and labelling: https://learnenglish.britishcouncil.org/apps/learnenglish-grammar
+- CEFR descriptors support measurable can-do goals across language activities: https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors
+
+### Validation still required
+- The new GitHub Actions build must pass before the new APK is offered.
+- Device retest is required for launcher-icon masking, update-install, RTL layout, voice playback, quiz behavior, and spaced-review persistence.
+- The review scheduler is an initial offline spaced-repetition implementation; it is not a full adaptive learning engine or pronunciation assessment.
