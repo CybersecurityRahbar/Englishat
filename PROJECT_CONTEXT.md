@@ -208,3 +208,18 @@ The user tested the first APK and approved the direction as a good start. This i
 - Added a dedicated development-only signing keystore to the repository and configured the debug build to use it consistently. New builds from this change onward will share certificate SHA-256 `04deaa0d685dc6473cd33e6283095dbe25fab86053c8e2e7abd72642a381cf19`. This keystore is public/test-only and must never be used for a production release.
 - The 0.1.0 → stable-signed 0.2.0 transition still needs a one-time clean install because the original private key is not available for the first CI artifact. The user's old app data may be deleted by uninstall; warn before asking them to do that. Once the stable-signed 0.2.0 build is installed, future builds can update in place.
 - Added an Android CI check that fails unless the produced debug APK has the expected stable certificate.
+
+
+## 16. Stable-signed 0.2.0 build — 2026-11-07
+
+- Generated and committed a development-only PKCS#12 debug keystore at `signing/englishat-debug.keystore`, with its purpose and fingerprint documented in `signing/README.md`.
+- Configured the Gradle debug build to use this same key for every subsequent CI/local debug APK.
+- Android CI now runs `apksigner verify --print-certs` and enforces the stable certificate fingerprint before uploading an APK.
+- Latest stable-signed build: Actions run `42380065064`, successful: https://github.com/CybersecurityRahbar/Englishat/actions/runs/42380065064
+- Steps verified successful: Android SDK setup, dependency resolution, Kotlin/Compose compile, APK packaging, expected signer fingerprint check, and artifact upload.
+- Expected stable debug certificate SHA-256: `04deaa0d685dc6473cd33e6283095dbe25fab86053c8e2e7abd72642a381cf19`.
+- Artifact `englishat-debug-apk`, ID `13577007479`, ZIP SHA-256 `1b40bf3247fbb63db442bf00000770bec188cd452d1ca220a4f6183cb23db464`.
+- Downloaded APK SHA-256: `f1b7cf310e7c5f76ca6f968199f3c6b9d290cfb751501635b150f17cb10f7171`; ZIP integrity passed and APK file identification succeeded.
+- Compatibility finding: the original 0.1.0 APK and first 0.2.0 attempt had different CI-generated debug certificates. Android rejects in-place updates across that signing mismatch. The first transition from the user's old 0.1.0 install to this stable-signed 0.2.0 build therefore requires uninstall/reinstall; this may remove locally stored 0.1.0 progress. Warn the user clearly before asking them to uninstall.
+- From this stable-signed 0.2.0 APK onward, the fixed development key is reused, so subsequent debug APK updates can install over the previous stable-signed build without a signature change.
+- Device-level installation, visual inspection of the adaptive icon on the user's launcher, and interactive review/practice testing remain pending.
