@@ -11,6 +11,7 @@ Englishat is an Arabic-first native Android app for learning English through str
 - Daily flashcard review with difficulty ratings and a locally persisted spaced-repetition schedule.
 - On-device progress, completed lessons, favorites, XP, and study streaks with Preferences DataStore.
 - Original Android adaptive launcher icon for Englishat.
+- Stable development-only debug signing key used by CI so future debug APK updates keep the same certificate. It is public and must never be used for a production release.
 - GitHub Actions builds a debug APK and uploads it as an artifact.
 
 ## Build
