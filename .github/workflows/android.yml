@@ -28,6 +28,16 @@ jobs:
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
       - name: Build debug APK
         run: gradle --no-daemon :app:assembleDebug
+      - name: Verify stable debug signing certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          SIGNER="$ANDROID_HOME/build-tools/36.0.0/apksigner"
+          APK="app/build/outputs/apk/debug/app-debug.apk"
+          CERT=$("$SIGNER" verify --print-certs "$APK" | awk -F': ' '/certificate SHA-256 digest:/ {print $2; exit}')
+          echo "Englishat debug certificate: $CERT"
+          test "$CERT" = "04deaa0d685dc6473cd33e6283095dbe25fab86053c8e2e7abd72642a381cf19"
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
