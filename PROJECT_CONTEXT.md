@@ -92,7 +92,8 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - No recorded native audio assets, speech-recognition assessment, pronunciation scoring, listening passages, writing correction, placement test, user accounts, cloud sync, or content management backend yet.
 - Browser speech synthesis has been replaced with Android TextToSpeech. Voice availability and quality depend on the device's installed English voice data.
 - Textbook-derived content needs ownership/licensing review and editorial QA.
-- Confirm CI build status and fix any Gradle/API compatibility errors after the first GitHub Actions run.
+- The first GitHub Actions run (2026-11-07, run 42373948824) stopped in the Android SDK setup action before Gradle ran: that action tried to install the obsolete SDK package `tools`, which is no longer published. The workflow was changed to request only `platform-tools` from the setup action; the next run must confirm the Android SDK install and actual Kotlin/Gradle compilation.
+- This first CI failure was an environment setup problem, not evidence of a Kotlin compilation error; the build task was skipped, so app compilation remains unverified.
 - Add automated unit/UI tests and accessibility checks.
 - Expand lessons and CEFR can-do objectives; add spaced-repetition scheduling for vocabulary; add listening and speaking practice.
 - Design later A2/B1 content only after A1 content is reviewed and assessed.
@@ -103,3 +104,11 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - Preserve the five original HTML prototypes; treat them as references, not production UI.
 - Keep this file cumulative: append important decisions, implementation changes, test results, discovered issues, and next steps after each project work session.
 - Be precise about build/test status. A workflow file being added does not mean the APK has been successfully built; report success only after checking the actual run.
+
+
+## 8. CI validation follow-up — 2026-11-07
+
+- Inspected the first push-triggered Actions run (ID 42373948824). Checkout, JDK 17 setup, and Gradle 9.3.1 setup succeeded.
+- The run failed inside `android-actions/setup-android@v3` because its default package list included the retired SDK package `tools`; `sdkmanager` returned “Failed to find package 'tools'”. The explicit SDK install and Gradle build steps were skipped.
+- Updated the workflow input to `packages: platform-tools` so the setup action no longer requests the obsolete package. The next workflow run is required to verify SDK installation and the actual APK compilation.
+- Do not claim that an APK is available until the workflow finishes successfully and the uploaded artifact is confirmed.
