@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b4d">
+<title>الانجليزية المبسطة مع سلطان اللوزي</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+:root{--navy:#172b4d;--blue:#2563eb;--teal:#0f766e;--orange:#f97316;--ink:#172033;--muted:#667085;--bg:#f4f7fb;--line:#e5eaf2;--white:#fff;--success:#16a34a;--danger:#dc2626}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7}
+header{background:linear-gradient(120deg,#172b4d,#244b76);color:#fff;padding:22px 18px 26px}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;font-size:18px}
+.version{font-size:12px;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:30px}
+h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:24px 0 8px}
+header p{margin:0;color:#e3edf8}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta span{background:#ffffff18;border:1px solid #ffffff33;padding:5px 10px;border-radius:9px;font-size:13px}
+main{max-width:1100px;margin:18px auto;padding:0 16px 40px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:16px}
+.side,.panel,.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #14213d08}
+.side{padding:12px;height:max-content;position:sticky;top:12px}
+.nav{width:100%;border:0;background:transparent;text-align:right;padding:11px 12px;border-radius:10px;font:inherit;color:#344054;cursor:pointer}
+.nav.active{background:#eaf1ff;color:#1748a3;font-weight:700}
+.content{min-width:0}
+.panel{padding:clamp(16px,3vw,26px);margin-bottom:14px}
+.eyebrow{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.3px}
+.panel h2{margin:4px 0 12px;font-size:23px}
+.panel h3{margin:18px 0 8px;font-size:18px}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{padding:15px;box-shadow:none;transition:.2s}
+.card.click{cursor:pointer}
+.card.click:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 8px 20px #14213d14}
+.card h3{margin:0 0 8px;font-size:17px}
+.en{direction:ltr;text-align:left;font-family:Arial,sans-serif}
+.big{font-size:21px;font-weight:800;direction:ltr;text-align:left;font-family:Arial,sans-serif}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px;text-align:right}
+th{background:#f3f6fb}
+.enCell{direction:ltr;text-align:left;font-family:Arial,sans-serif}
+button,.btn{border:0;background:var(--blue);color:#fff;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;transition:.2s}
+button:hover{filter:brightness(1.05)}
+button.secondary{background:#edf2f8;color:#243247}
+button.ghost{background:#e7f5f2;color:#0f665f}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.speak{padding:6px 11px;font-size:14px;background:#e9f1ff;color:#1748a3;border-radius:10px}
+.note{background:#fff7ed;border-right:4px solid var(--orange);padding:12px;border-radius:9px;margin-top:14px}
+.tip{background:#eef4ff;border-right:4px solid var(--blue);padding:12px 14px;border-radius:9px;margin:12px 0}
+.word{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eef1f5}
+.word:last-child{border:0}
+.word .w-pron{color:var(--teal);font-weight:700;font-size:14px}
+.word .w-ar{color:var(--muted);font-size:14px}
+.grammar-box{background:#f0f7fc;padding:14px;border-right:4px solid var(--blue);border-radius:9px;margin-bottom:12px}
+.grammar-box h3{margin:0 0 8px;font-size:17px}
+.grammar-box ul{margin:8px 20px 0 0;padding:0}
+.question{font-size:20px;font-weight:800;color:var(--navy);margin:16px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option-btn{padding:13px;border:2px solid var(--line);background:#f8fafc;color:#253247;border-radius:12px;font:inherit;font-weight:700;cursor:pointer;transition:.2s}
+.option-btn:hover{border-color:var(--blue);background:#eef4ff}
+.option-btn.correct{background:#dcfce7;color:#166534;border-color:#86efac}
+.option-btn.wrong{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.option-btn:disabled{cursor:default}
+.progress{height:9px;background:#e8edf4;border-radius:20px;overflow:hidden;margin:10px 0 4px}
+.progress>span{display:block;height:100%;background:#16a085;width:0;transition:.3s}
+.game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px}
+.score{font-size:22px;font-weight:800;color:var(--teal)}
+.feedback{font-size:14px;margin-top:10px;font-weight:700}
+.result-box{text-align:center;padding:10px 0}
+.result-box p{margin:6px 0}
+.hidden{display:none!important}
+@media(max-width:760px){
+.layout{grid-template-columns:1fr}
+.side{position:static;display:flex;overflow:auto;gap:4px;padding:7px}
+.nav{white-space:nowrap;width:auto;padding:8px 11px;font-size:13px}
+.grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){.options{grid-template-columns:1fr}.word{flex-direction:column;text-align:center;gap:6px}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+<div class="top">
+<div class="brand">✦ الانجليزية المبسطة</div>
+<div class="version">الوحدة 1 · V1.0</div>
+</div>
+<h1>الانجليزية المبسطة مع سلطان اللوزي</h1>
+<p>منهج American English File 1 · المستوى الأول · شرح عربي + نطق + تدريب تفاعلي</p>
+<div class="meta">
+<span>الوحدة 1: الأسماء والتحيات</span>
+<span>المستوى: مبتدئ</span>
+<span>عدد الكلمات: 5</span>
+<span>اللعبة: 5 أسئلة</span>
+</div>
+</div></header>
+
+<main><div class="layout">
+
+<aside class="side">
+<button class="nav active" data-tab="home">نظرة عامة</button>
+<button class="nav" data-tab="vocab">المفردات</button>
+<button class="nav" data-tab="grammar">القواعد</button>
+<button class="nav" data-tab="game">اللعبة التفاعلية</button>
+</aside>
+
+<section class="content">
+
+<!-- ===== نظرة عامة ===== -->
+<div id="home" class="tab">
+<div class="panel">
+<div class="eyebrow">ابدأ من هنا</div>
+<h2>ماذا ستتعلم في هذه الوحدة؟</h2>
+<div class="grid">
+<div class="card click" onclick="openTab('vocab')"><h3>📚 المفردات</h3><p>تعلّم كلمات التحيات والتعريف بالنفس، مع النطق بالعربي وزر استماع لكل كلمة.</p></div>
+<div class="card click" onclick="openTab('grammar')"><h3>📝 القواعد</h3><p>فعل الكينونة <span class="en">am / is / are</span> والضمائر الأساسية بشرح مبسّط جدًا.</p></div>
+<div class="card click" onclick="openTab('game')"><h3>🎮 لعبة تفاعلية</h3><p>اختبر معلوماتك في 5 أسئلة، واعرف نتيجتك فورًا مع إمكانية إعادة اللعب.</p></div>
+<div class="card"><h3>🔊 النطق</h3><p>استخدم زر الصوت بجانب كل كلمة؛ النطق يعمل بميزة النطق في المتصفح.</p></div>
+</div>
+</div>
+<div class="panel">
+<h2>خطة الدراسة المقترحة</h2>
+<ol>
+<li>ابدأ بتبويب <b>المفردات</b> واستمع لكل كلمة وكرّرها بصوتك.</li>
+<li>انتقل إلى <b>القواعد</b> وافهم متى نستخدم <span class="en">am</span> ومتى <span class="en">is</span> ومتى <span class="en">are</span>.</li>
+<li>ارجع إلى المفردات مرة أخرى بعد فهم القاعدة.</li>
+<li>العب <b>اللعبة التفاعلية</b> وحاول الوصول إلى الدرجة الكاملة.</li>
+</ol>
+<div class="note">ملاحظة: النطق هنا يعتمد على ميزة النطق في جهازك، وليس ملفات صوتية أصلية للكتاب. إن لم يعمل الصوت فالمتصفح لا يدعم الميزة.</div>
+</div>
+</div>
+
+<!-- ===== المفردات ===== -->
+<div id="vocab" class="tab hidden">
+<div class="panel">
+<div class="eyebrow">Vocabulary · الوحدة 1</div>
+<h2>الأسماء والتحيات</h2>
+<p class="muted">اضغط زر الصوت لسماع الكلمة، ثم كرّرها بصوت مرتفع.</p>
+
+<div class="word">
+<div>
+<div class="big">Hello</div>
+<div class="w-pron">هَلُو</div>
+<div class="w-ar">مرحباً</div>
+</div>
+<button class="speak" onclick="speak('Hello')">🔊 استمع</button>
+</div>
+
+<div class="word">
+<div>
+<div class="big">Hi</div>
+<div class="w-pron">هَاي</div>
+<div class="w-ar">أهلاً (غير رسمية)</div>
+</div>
+<button class="speak" onclick="speak('Hi')">🔊 استمع</button>
+</div>
+
+<div class="word">
+<div>
+<div class="big">My name is…</div>
+<div class="w-pron">مَاي نِيم إز</div>
+<div class="w-ar">اسمي هو…</div>
+</div>
+<button class="speak" onclick="speak('My name is')">🔊 استمع</button>
+</div>
+
+<div class="word">
+<div>
+<div class="big">Nice to meet you</div>
+<div class="w-pron">نَايْس تُو مِيت يُو</div>
+<div class="w-ar">سعيد بلقائك</div>
+</div>
+<button class="speak" onclick="speak('Nice to meet you')">🔊 استمع</button>
+</div>
+
+<div class="word">
+<div>
+<div class="big">Goodbye</div>
+<div class="w-pron">جُود بَاي</div>
+<div class="w-ar">وداعاً</div>
+</div>
+<button class="speak" onclick="speak('Goodbye')">🔊 استمع</button>
+</div>
+
+<div class="note"><span class="en">Hi</span> أكثر عفوية من <span class="en">Hello</span>، و<span class="en">Bye</span> صيغة غير رسمية من <span class="en">Goodbye</span>.</div>
+</div>
+</div>
+
+<!-- ===== القواعد ===== -->
+<div id="grammar" class="tab hidden">
+<div class="panel">
+<div class="eyebrow">Grammar · Verb to be</div>
+<h2>القواعد الأساسية</h2>
+
+<div class="grammar-box">
+<h3>1. فعل الكينونة (Verb to be)</h3>
+<p>نستخدم فعل <strong class="en">am / is / are</strong> لتعريف بأنفسنا أو وصف شخص أو شيء.</p>
+<ul>
+<li><span class="en">I am</span> (أنا) ← تُختصر إلى <span class="en">I'm</span> (آيم)</li>
+<li><span class="en">You are</span> (أنت) ← تُختصر إلى <span class="en">You're</span> (يُور)</li>
+<li><span class="en">He is</span> (هو) ← تُختصر إلى <span class="en">He's</span> (هيز)</li>
+<li><span class="en">She is</span> (هي) ← تُختصر إلى <span class="en">She's</span> (شيز)</li>
+</ul>
+</div>
+
+<div class="grammar-box">
+<h3>2. الضمائر (Subject Pronouns)</h3>
+<p><span class="en">I</span> (أنا) · <span class="en">You</span> (أنت) · <span class="en">He</span> (هو) · <span class="en">She</span> (هي) · <span class="en">It</span> (لغير العاقل) · <span class="en">We</span> (نحن) · <span class="en">They</span> (هم)</p>
+</div>
+
+<h3>جدول مختصر</h3>
+<table>
+<tr><th>الضمير</th><th>الفعل</th><th>الاختصار</th><th>مثال</th><th>المعنى</th></tr>
+<tr><td class="enCell">I</td><td class="enCell">am</td><td class="enCell">I'm</td><td class="enCell">I'm Sultan.</td><td>أنا سلطان.</td></tr>
+<tr><td class="enCell">You</td><td class="enCell">are</td><td class="enCell">You're</td><td class="enCell">You're my friend.</td><td>أنت صديقي.</td></tr>
+<tr><td class="enCell">He</td><td class="enCell">is</td><td class="enCell">He's</td><td class="enCell">He's a teacher.</td><td>هو مدرّس.</td></tr>
+<tr><td class="enCell">She</td><td class="enCell">is</td><td class="enCell">She's</td><td class="enCell">She's Sally.</td><td>هي سالي.</td></tr>
+<tr><td class="enCell">It</td><td class="enCell">is</td><td class="enCell">It's</td><td class="enCell">It's a book.</td><td>إنه كتاب.</td></tr>
+<tr><td class="enCell">We</td><td class="enCell">are</td><td class="enCell">We're</td><td class="enCell">We're students.</td><td>نحن طلاب.</td></tr>
+<tr><td class="enCell">They</td><td class="enCell">are</td><td class="enCell">They're</td><td class="enCell">They're friends.</td><td>هم أصدقاء.</td></tr>
+</table>
+
+<div class="tip"><b>كيف أختار الفعل؟</b> <span class="en">I</span> معها <span class="en">am</span> — <span class="en">He / She / It</span> معها <span class="en">is</span> — <span class="en">You / We / They</span> معها <span class="en">are</span>.</div>
+
+<div class="actions">
+<button class="speak" onclick="speak('I am. You are. He is. She is. It is. We are. They are.')">🔊 استمع للضمائر والأفعال</button>
+</div>
+</div>
+</div>
+
+<!-- ===== اللعبة ===== -->
+<div id="game" class="tab hidden">
+<div class="panel">
+<div class="eyebrow">لعبة تفاعلية · 5 أسئلة</div>
+<h2>اختر الترجمة الصحيحة</h2>
+<div class="game-top">
+<span class="muted" id="progress-text">السؤال 1 من 5</span>
+<span class="score" id="score-display">النقاط: 0 / 50</span>
+</div>
+<div class="progress"><span id="progress-bar"></span></div>
+<div class="question" id="question-text">...</div>
+<div class="options" id="options-container"></div>
+<div class="feedback" id="game-feedback"></div>
+<div class="actions"><button class="secondary" onclick="initGame()">🔄 إعادة اللعبة</button></div>
+</div>
+</div>
+
+</section>
+</div></main>
+
+<script>
+/* ---------- التنقل بين التبويبات ---------- */
+function openTab(id){
+  document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active', x.dataset.tab===id));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden', x.id!==id));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='game') initGame();
+}
+document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>openTab(b.dataset.tab)));
+
+/* ---------- النطق ---------- */
+function speak(text){
+  if(!('speechSynthesis' in window)){alert('متصفحك لا يدعم النطق الصوتي.');return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.85;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- اللعبة ---------- */
+const gameData=[
+{q:"ما معنى كلمة (Hello)؟",options:["وداعاً","مرحباً","شكراً","من فضلك"],correct:1},
+{q:"كيف نقول (اسمي سلطان)؟",options:["I am Sultan","My name Sultan","My name is Sultan","You are Sultan"],correct:2},
+{q:"ما هو الاختصار الصحيح لـ (He is)؟",options:["He's","His","He're","Heam"],correct:0},
+{q:"ماذا نقول عند مقابلة شخص لأول مرة؟",options:["Goodbye","Nice to meet you","How old are you?","See you later"],correct:1},
+{q:"ما معنى كلمة (Goodbye)؟",options:["أهلاً","صباح الخير","وداعاً","سعيد بلقائك"],correct:2}
+];
+const TOTAL=gameData.length, POINT=10, MAX=TOTAL*POINT;
+let currentQuestion=0, score=0, locked=false;
+
+function initGame(){
+  currentQuestion=0; score=0; locked=false;
+  document.getElementById('score-display').textContent='النقاط: 0 / '+MAX;
+  loadQuestion();
+}
+
+function loadQuestion(){
+  const qText=document.getElementById('question-text');
+  const box=document.getElementById('options-container');
+  const fb=document.getElementById('game-feedback');
+  box.innerHTML=''; box.style.gridTemplateColumns='';
+  fb.textContent=''; fb.className='feedback';
+  locked=false;
+
+  document.getElementById('progress-bar').style.width=(currentQuestion/TOTAL*100)+'%';
+
+  if(currentQuestion>=TOTAL){ finishGame(); return; }
+
+  document.getElementById('progress-text').textContent='السؤال '+(currentQuestion+1)+' من '+TOTAL;
+
+  const data=gameData[currentQuestion];
+  qText.textContent=data.q;
+  data.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.textContent=opt;
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+}
+
+function checkAnswer(selected, btn){
+  if(locked) return;
+  locked=true;
+  const data=gameData[currentQuestion];
+  const all=document.querySelectorAll('#options-container .option-btn');
+  all.forEach(b=>b.disabled=true);
+  const fb=document.getElementById('game-feedback');
+
+  if(selected===data.correct){
+    btn.classList.add('correct');
+    score+=POINT;
+    fb.textContent='إجابة صحيحة ✓';
+    fb.style.color='#166534';
+  }else{
+    btn.classList.add('wrong');
+    all[data.correct].classList.add('correct');
+    fb.textContent='إجابة خاطئة ✗ — الإجابة الصحيحة: '+data.options[data.correct];
+    fb.style.color='#991b1b';
+  }
+
+  document.getElementById('score-display').textContent='النقاط: '+score+' / '+MAX;
+  currentQuestion++;
+  setTimeout(loadQuestion,1500);
+}
+
+function finishGame(){
+  const qText=document.getElementById('question-text');
+  const box=document.getElementById('options-container');
+  const pct=Math.round(score/MAX*100);
+
+  document.getElementById('progress-bar').style.width='100%';
+  document.getElementById('progress-text').textContent='انتهت اللعبة';
+  qText.textContent='🎉 أحسنت! لقد أكملت اللعبة.';
+
+  box.style.gridTemplateColumns='1fr';
+  box.innerHTML=
+    '<div class="result-box">'+
+      '<p class="score">'+score+' / '+MAX+' — '+pct+'%</p>'+
+      '<p>'+(pct>=80?'ممتاز! أنت جاهز للوحدة التالية.':pct>=50?'جيد! راجع المفردات ثم أعد المحاولة.':'لا بأس، راجع المفردات والقواعد ثم أعد اللعب.')+'</p>'+
+      '<div class="actions" style="justify-content:center"><button onclick="initGame()">العب مرة أخرى</button></div>'+
+    '</div>';
+}
+
+/* بداية */
+openTab('home');
+</script>
+</body>
+</html>

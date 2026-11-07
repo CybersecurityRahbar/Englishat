@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b4d">
+<title>English Learning Studio — V0.3</title>
+<style>
+:root{--navy:#172b4d;--blue:#2563eb;--teal:#0f766e;--orange:#f97316;--ink:#172033;--muted:#667085;--bg:#f4f7fb;--line:#e5eaf2;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(120deg,#172b4d,#244b76);color:#fff;padding:22px 18px 26px}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:800;font-size:18px}.version{font-size:12px;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:30px}
+h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:24px 0 8px}header p{margin:0;color:#e3edf8}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.meta span{background:#ffffff18;border:1px solid #ffffff33;padding:5px 10px;border-radius:9px;font-size:13px}
+main{max-width:1100px;margin:18px auto;padding:0 16px 40px}.layout{display:grid;grid-template-columns:230px 1fr;gap:16px}.side,.panel,.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #14213d08}
+.side{padding:12px;height:max-content;position:sticky;top:12px}.nav{width:100%;border:0;background:transparent;text-align:right;padding:11px 12px;border-radius:10px;font:inherit;color:#344054;cursor:pointer}.nav.active{background:#eaf1ff;color:#1748a3;font-weight:700}.content{min-width:0}.panel{padding:clamp(16px,3vw,26px);margin-bottom:14px}.eyebrow{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.3px}.panel h2{margin:4px 0 12px;font-size:23px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:15px;box-shadow:none}.card h3{margin:0 0 8px;font-size:17px}.en{direction:ltr;text-align:left;font-family:Arial,sans-serif}.big{font-size:22px;font-weight:800;direction:ltr;text-align:left}.pill{display:inline-block;background:#eef4ff;color:#214e9b;border-radius:30px;padding:3px 9px;font-size:12px;margin:2px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}th,td{border:1px solid var(--line);padding:9px;text-align:right}th{background:#f3f6fb}.enCell{direction:ltr;text-align:left;font-family:Arial,sans-serif}
+button,.btn{border:0;background:var(--blue);color:white;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}button.secondary{background:#edf2f8;color:#243247}button.ghost{background:#e7f5f2;color:#0f665f}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.speak{padding:6px 9px;font-size:13px;background:#e9f1ff;color:#1748a3}.question{padding:14px;border:1px solid var(--line);border-radius:12px;margin:12px 0}.question p{margin:0 0 10px}.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{background:#f1f4f8;color:#253247}.choice.correct{background:#dcfce7;color:#166534}.choice.wrong{background:#fee2e2;color:#991b1b}.feedback{font-size:14px;margin-top:8px;font-weight:700}.progress{height:9px;background:#e8edf4;border-radius:20px;overflow:hidden}.progress>span{display:block;height:100%;background:#16a085;width:0;transition:.2s}.score{font-size:28px;font-weight:800;color:var(--teal)}.hidden{display:none!important}.note{background:#fff7ed;border-right:4px solid var(--orange);padding:12px;border-radius:9px}.source{font-size:12px;color:#7a8495;border-top:1px solid var(--line);padding-top:10px;margin-top:18px}.word{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eef1f5}.word:last-child{border:0}.word .en{font-weight:700}.search{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:8px 0 12px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:4px}.nav{white-space:nowrap;width:auto}.grid{grid-template-columns:1fr}.side{padding:7px}.nav{padding:8px 11px;font-size:13px}}
+</style></head>
+<body>
+<header><div class="wrap">
+<div class="top"><div class="brand">✦ English Learning Studio</div><div class="version">نسخة تجريبية V0.3</div></div>
+<h1>1A — Welcome to the class</h1>
+<p>أول درس من كتاب American English File · شرح عربي + نطق + مفردات + تدريب تفاعلي</p>
+<div class="meta"><span>Student Book: pp. 6–7</span><span>Grammar Bank: p. 124</span><span>Vocabulary Bank: p. 148</span><span>المستوى: مبتدئ</span></div>
+</div></header>
+<main><div class="layout">
+<aside class="side">
+<button class="nav active" data-tab="start">نظرة عامة</button>
+<button class="nav" data-tab="dialogue">المحادثة</button>
+<button class="nav" data-tab="grammar">القواعد</button>
+<button class="nav" data-tab="pron">النطق</button>
+<button class="nav" data-tab="vocab">الكلمات</button>
+<button class="nav" data-tab="practice">التدريب</button>
+<button class="nav" data-tab="exam">اختبار الدرس</button>
+</aside>
+<section class="content">
+<div id="start" class="tab">
+<div class="panel"><div class="eyebrow">ابدأ من هنا</div><h2>ماذا ستتعلم في هذا الدرس؟</h2>
+<div class="grid">
+<div class="card"><h3>💬 المحادثة</h3><p>التحية، التعارف، السؤال عن الاسم ورقم الهاتف، وكيف تسأل شخصًا عن حاله.</p></div>
+<div class="card"><h3>📘 القواعد</h3><p>الفعل <b>be</b> في الجمل المثبتة، والضمائر: I, you, he, she, it, we, they.</p></div>
+<div class="card"><h3>🔊 النطق</h3><p>ستة أصوات متحركة، ثم ملاحظة المقطع الذي نضغط عليه في الكلمة.</p></div>
+<div class="card"><h3>🔢 المفردات</h3><p>أيام الأسبوع والأرقام من 0 إلى 20، مع طريقة استخدامها في الهاتف والتعارف.</p></div>
+</div></div>
+<div class="panel"><h2>خطة الدراسة المقترحة</h2><ol><li>اقرأ شرح المحادثة وافهم العبارات.</li><li>تعلم قاعدة <span class="en">am / is / are</span>.</li><li>استمع للنطق باستخدام زر الصوت وكرر بصوتك.</li><li>راجع الأيام والأرقام.</li><li>حل التدريب ثم الاختبار القصير.</li></ol><div class="note">ملاحظة: هذه النسخة تستخدم نطق الجهاز (إن كان متاحًا)، وليست ملفات الصوت الأصلية للكتاب. لم أضع تسجيلًا وهميًا مكان الصوت الأصلي.</div></div>
+</div>
+<div id="dialogue" class="tab hidden">
+<div class="panel"><div class="eyebrow">Student Book · p.6 · Listening & Speaking</div><h2>التعارف والتحية</h2>
+<p>يعرض الدرس خمس مواقف قصيرة بين Carla وMatt وSally وBen. الفكرة الأساسية: تبدأ بالتحية، تقول اسمك، تسأل عن اسم الشخص، ثم تقدم شخصًا إلى آخر.</p>
+<table><tr><th>العبارة</th><th>المعنى</th><th>النطق التقريبي</th></tr>
+<tr><td class="enCell">Hello / Hi</td><td>مرحبًا / أهلًا</td><td>هَلّو / هاي</td></tr>
+<tr><td class="enCell">What’s your name?</td><td>ما اسمك؟</td><td>وَتس يور نيم؟</td></tr>
+<tr><td class="enCell">My name’s Ali.</td><td>اسمي علي.</td><td>ماي نيمز علي</td></tr>
+<tr><td class="enCell">Nice to meet you.</td><td>سعيد بلقائك.</td><td>نايس تُ ميت يو</td></tr>
+<tr><td class="enCell">How are you?</td><td>كيف حالك؟</td><td>هاو آر يو؟</td></tr>
+<tr><td class="enCell">I’m fine, thanks.</td><td>أنا بخير، شكرًا.</td><td>آيم فاين، ثانكس</td></tr>
+<tr><td class="enCell">See you later.</td><td>أراك لاحقًا.</td><td>سي يو ليتر</td></tr>
+<tr><td class="enCell">Goodbye / Bye</td><td>إلى اللقاء / باي</td><td>غودباي / باي</td></tr></table>
+<div class="actions"><button class="speak" onclick="say('What is your name?')">🔊 استمع: What’s your name?</button><button class="speak" onclick="say('Nice to meet you.')">🔊 استمع: Nice to meet you.</button><button class="speak" onclick="say('How are you? I am fine, thank you.')">🔊 استمع: How are you?</button></div>
+<div class="note">معلومة من الدرس: <span class="en">Hi</span> أكثر عفوية من <span class="en">Hello</span>. و<span class="en">Bye</span> صيغة غير رسمية من <span class="en">Goodbye</span>.</div></div>
+<div class="panel"><h2>إجابات نشاط الاستماع في الكتاب</h2><p class="muted">هذه إجابات الأنشطة التي أمكن التحقق منها في دليل المعلم.</p>
+<table><tr><th>النشاط</th><th>الإجابة</th></tr><tr><td>تحديد الأشخاص A–D</td><td class="enCell">A Carla · B Matt · C Sally · D Ben</td></tr><tr><td>الكلمات الناقصة في المحادثة</td><td class="enCell">2 Sorry · 3 number · 4 Hi · 5 meet · 6 you · 7 thank · 8 Fine</td></tr><tr><td>مقابلات العبارات</td><td class="enCell">My name’s… = I’m · Very well = Fine · Thank you = Thanks · Goodbye = Bye</td></tr></table>
+</div></div>
+<div id="grammar" class="tab hidden">
+<div class="panel"><div class="eyebrow">Grammar · verb be (+), subject pronouns</div><h2>الفعل be: am / is / are</h2>
+<p>نستخدم <b>am / is / are</b> لربط الشخص أو الشيء بوصف أو اسم أو معلومة. في هذا الدرس نركز على الجمل المثبتة.</p>
+<table><tr><th>الضمير</th><th>الفعل</th><th>الاختصار</th><th>مثال</th><th>المعنى</th></tr>
+<tr><td class="enCell">I</td><td class="enCell">am</td><td class="enCell">I’m</td><td class="enCell">I’m Ali.</td><td>أنا علي.</td></tr>
+<tr><td class="enCell">You</td><td class="enCell">are</td><td class="enCell">You’re</td><td class="enCell">You’re my partner.</td><td>أنت شريكي.</td></tr>
+<tr><td class="enCell">He</td><td class="enCell">is</td><td class="enCell">He’s</td><td class="enCell">He’s Matt.</td><td>إنه مات.</td></tr>
+<tr><td class="enCell">She</td><td class="enCell">is</td><td class="enCell">She’s</td><td class="enCell">She’s in my class.</td><td>هي في صفي.</td></tr>
+<tr><td class="enCell">It</td><td class="enCell">is</td><td class="enCell">It’s</td><td class="enCell">It’s a book.</td><td>إنه كتاب.</td></tr>
+<tr><td class="enCell">We</td><td class="enCell">are</td><td class="enCell">We’re</td><td class="enCell">We’re students.</td><td>نحن طلاب.</td></tr>
+<tr><td class="enCell">They</td><td class="enCell">are</td><td class="enCell">They’re</td><td class="enCell">They’re friends.</td><td>هم أصدقاء.</td></tr></table>
+<h3>كيف أختار الفعل؟</h3><ul><li><b>I</b> معها <span class="en">am</span>.</li><li><b>He / She / It</b> معها <span class="en">is</span>.</li><li><b>You / We / They</b> معها <span class="en">are</span>.</li></ul>
+<div class="note">الاختصارات شائعة في الكلام: <span class="en">I am → I’m</span>، <span class="en">She is → She’s</span>، <span class="en">They are → They’re</span>. وضمير <span class="en">you</span> يُستخدم للمفرد والجمع.</div>
+<div class="actions"><button class="speak" onclick="say('I am. You are. He is. She is. It is. We are. They are.')">🔊 استمع للضمائر والأفعال</button></div>
+</div>
+<div class="panel"><h2>تطبيق محلول من الكتاب</h2><table><tr><th>الجملة الكاملة</th><th>الاختصار</th></tr><tr><td class="enCell">I am Carla.</td><td class="enCell">I’m Carla.</td></tr><tr><td class="enCell">I am Matt.</td><td class="enCell">I’m Matt.</td></tr><tr><td class="enCell">My name is Ben.</td><td class="enCell">My name’s Ben.</td></tr><tr><td class="enCell">You are my partner.</td><td class="enCell">You’re my partner.</td></tr><tr><td class="enCell">She is in my salsa class.</td><td class="enCell">She’s in my salsa class.</td></tr></table></div>
+</div>
+<div id="pron" class="tab hidden">
+<div class="panel"><div class="eyebrow">Pronunciation · Student Book p.7</div><h2>أصوات الحروف المتحركة</h2>
+<p>الكتاب يوضح أن الحرف الواحد قد يُنطق بأكثر من صوت؛ لذلك نتعلم الصوت من خلال كلمة نموذجية، وليس من شكل الحرف وحده.</p>
+<table><tr><th>الكلمة النموذجية</th><th>الصوت</th><th>أمثلة الكتاب</th><th>تقريب عربي</th></tr>
+<tr><td class="enCell">fish</td><td class="enCell">/ɪ/</td><td class="enCell">it · this · in</td><td>إ قصيرة</td></tr>
+<tr><td class="enCell">tree</td><td class="enCell">/i/</td><td class="enCell">he · we · meet</td><td>إي طويلة</td></tr>
+<tr><td class="enCell">cat</td><td class="enCell">/æ/</td><td class="enCell">am · thanks · Sally</td><td>بين أَ وَا</td></tr>
+<tr><td class="enCell">egg</td><td class="enCell">/e/</td><td class="enCell">very · well · welcome</td><td>إِه قصيرة تقريبًا</td></tr>
+<tr><td class="enCell">train</td><td class="enCell">/eɪ/</td><td class="enCell">they · name · later</td><td>إيْ</td></tr>
+<tr><td class="enCell">bike</td><td class="enCell">/aɪ/</td><td class="enCell">hi · bye</td><td>آي</td></tr></table>
+<h3>Word stress — نبرة الكلمة</h3><p>الكلمة التي تتكون من مقطعين أو أكثر يكون فيها مقطع يُنطق بقوة أو وضوح أكبر.</p>
+<div class="grid"><div class="card"><div class="big">GOOD-bye</div><small>الضغط على المقطع الأول في نموذج الكتاب</small></div><div class="card"><div class="big">SOR-ry</div><small>الضغط على المقطع الأول</small></div><div class="card"><div class="big">WEL-come</div><small>الضغط على المقطع الأول</small></div></div>
+<div class="actions"><button class="speak" onclick="say('fish, it, this, in. tree, he, we, meet. cat, am, thanks, Sally. egg, very, well, welcome. train, they, name, later. bike, hi, bye.')">🔊 استمع إلى أمثلة الأصوات</button></div>
+<div class="note">النطق العربي هنا تقريب مساعد فقط؛ الأفضل أن تسمع الصوت ثم تكرر، لأن بعض أصوات الإنجليزية لا تطابق أصوات العربية تمامًا.</div>
+</div></div>
+<div id="vocab" class="tab hidden">
+<div class="panel"><div class="eyebrow">Vocabulary Bank · p.148</div><h2>أيام الأسبوع والأرقام 0–20</h2>
+<input id="wordSearch" class="search" placeholder="ابحث عن كلمة أو رقم..." oninput="filterWords()">
+<div id="words"></div>
+<div class="note">أيام الأسبوع في الإنجليزية تبدأ بحرف كبير. مثال: <span class="en">Monday</span> وليس <span class="en">monday</span>.</div></div>
+</div>
+<div id="practice" class="tab hidden">
+<div class="panel"><div class="eyebrow">تدريب فوري</div><h2>جرّب بنفسك</h2><p class="muted">اختر الإجابة، وستظهر لك النتيجة مباشرة.</p><div id="practiceQuestions"></div><div class="actions"><button onclick="resetPractice()">إعادة التدريب</button></div></div>
+</div>
+<div id="exam" class="tab hidden">
+<div class="panel"><div class="eyebrow">اختبار قصير · 8 أسئلة</div><h2>هل أتقنت الدرس؟</h2><p class="muted">أجب عن الأسئلة ثم اضغط «احسب النتيجة».</p><div id="examQuestions"></div><button onclick="gradeExam()">احسب النتيجة</button><div id="examResult"></div></div>
+</div>
+</section></div>
+</main>
+<script>
+const words=[
+["Monday","الاثنين","مَندَي"],["Tuesday","الثلاثاء","تيوزدي"],["Wednesday","الأربعاء","وِنزدي"],["Thursday","الخميس","ثَرزدي"],["Friday","الجمعة","فرايدي"],["Saturday","السبت","ساتَردي"],["Sunday","الأحد","سَندي"],
+["zero","صفر","زيرو"],["one","واحد","وَن"],["two","اثنان","تو"],["three","ثلاثة","ثري"],["four","أربعة","فور"],["five","خمسة","فايف"],["six","ستة","سِكس"],["seven","سبعة","سِفِن"],["eight","ثمانية","إيت"],["nine","تسعة","ناين"],["ten","عشرة","تِن"],["eleven","أحد عشر","إلِفِن"],["twelve","اثنا عشر","توِلف"],["thirteen","ثلاثة عشر","ثِرتين"],["fourteen","أربعة عشر","فورتين"],["fifteen","خمسة عشر","فِفتين"],["sixteen","ستة عشر","سِكستين"],["seventeen","سبعة عشر","سِفِنتين"],["eighteen","ثمانية عشر","إيتين"],["nineteen","تسعة عشر","ناينتين"],["twenty","عشرون","توينتي"]];
+function say(t){if(!('speechSynthesis'in window)){alert('ميزة النطق غير متاحة في هذا المتصفح.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
+document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));document.getElementById(b.dataset.tab).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}));
+function renderWords(list=words){document.getElementById('words').innerHTML=list.map(w=>`<div class="word"><div><div class="en">${w[0]}</div><div>${w[1]} <span class="muted">· ${w[2]}</span></div></div><button class="speak" onclick="say('${w[0]}')">🔊</button></div>`).join('')}
+function filterWords(){let q=document.getElementById('wordSearch').value.toLowerCase();renderWords(words.filter(w=>w.join(' ').toLowerCase().includes(q)))}
+renderWords();
+const qs=[
+{q:"I ___ Ali.",a:["am","is","are"],c:"am",why:"مع I نستخدم am."},
+{q:"She ___ my teacher.",a:["am","is","are"],c:"is",why:"مع She نستخدم is."},
+{q:"They ___ students.",a:["am","is","are"],c:"are",why:"مع They نستخدم are."},
+{q:"ما الاختصار الصحيح لـ You are؟",a:["You're","You's","You am"],c:"You're",why:"You are تصبح You're."},
+{q:"What’s your ___?",a:["name","numbered","fine"],c:"name",why:"نسأل عن الاسم بعبارة What's your name?"},
+{q:"أي يوم يأتي بعد Friday؟",a:["Thursday","Saturday","Sunday"],c:"Saturday",why:"Saturday يأتي بعد Friday."},
+{q:"ما معنى Goodbye؟",a:["مرحبًا","إلى اللقاء","شكرًا"],c:"إلى اللقاء",why:"Goodbye تعني إلى اللقاء."},
+{q:"ما الرقم الذي يأتي بعد nineteen؟",a:["eighteen","twenty","thirteen"],c:"twenty",why:"بعد nineteen يأتي twenty."}
+];
+function buildPractice(){document.getElementById('practiceQuestions').innerHTML=qs.slice(0,5).map((q,i)=>`<div class="question"><p><b>${i+1}. ${q.q}</b></p><div class="choices">${q.a.map(a=>`<button class="choice" onclick="checkPractice(${i},'${a.replace(/'/g,"\\'")}',this)">${a}</button>`).join('')}</div><div class="feedback" id="pf${i}"></div></div>`).join('')}
+function checkPractice(i,a,btn){let q=qs[i],box=document.getElementById('pf'+i);btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);if(a===q.c){btn.classList.add('correct');box.textContent='صحيح ✓ '+q.why}else{btn.classList.add('wrong');box.textContent='ليست الإجابة الصحيحة. الإجابة: '+q.c+'. '+q.why}}
+function resetPractice(){buildPractice()}
+buildPractice();
+function buildExam(){document.getElementById('examQuestions').innerHTML=qs.map((q,i)=>`<div class="question"><p><b>${i+1}. ${q.q}</b></p>${q.a.map(a=>`<label style="display:block;margin:5px 0"><input type="radio" name="e${i}" value="${a}"> <span class="en">${a}</span></label>`).join('')}</div>`).join('')}
+function gradeExam(){let n=0,missing=0;qs.forEach((q,i)=>{let v=document.querySelector('input[name="e'+i+'"]:checked');if(!v)missing++;else if(v.value===q.c)n++});let pct=Math.round(n/qs.length*100);document.getElementById('examResult').innerHTML=`<p class="score">${n} / ${qs.length} — ${pct}%</p><p>${pct>=80?'ممتاز! راجع النطق ثم انتقل للدرس التالي.':pct>=60?'جيد. راجع الأخطاء ثم أعد الاختبار.':'ارجع إلى شرح القاعدة والمفردات ثم حاول مرة أخرى.'}</p>${missing?'<p class="muted">توجد '+missing+' أسئلة لم تجب عنها، واحتُسبت خطأ.</p>':''}`}
+buildExam();
+</script></body></html>

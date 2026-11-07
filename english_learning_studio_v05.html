@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b4d">
+<title>مفردات مصنفة حسب المواضيع - English Learning Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+:root{--navy:#172b4d;--blue:#2563eb;--teal:#0f766e;--orange:#f97316;--ink:#172033;--muted:#667085;--bg:#f4f7fb;--line:#e5eaf2;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(120deg,#172b4d,#244b76);color:#fff;padding:22px 18px 26px}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;font-size:18px}
+.version{font-size:12px;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:30px}
+h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:24px 0 8px}
+header p{margin:0;color:#e3edf8}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta span{background:#ffffff18;border:1px solid #ffffff33;padding:5px 10px;border-radius:9px;font-size:13px}
+main{max-width:1100px;margin:18px auto;padding:0 16px 40px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:16px}
+.side,.panel,.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #14213d08}
+.side{padding:12px;height:max-content;position:sticky;top:12px;max-height: 90vh; overflow-y: auto;}
+.nav{width:100%;border:0;background:transparent;text-align:right;padding:10px 12px;border-radius:10px;font:inherit;color:#344054;cursor:pointer;margin-bottom:2px;font-size:14px;}
+.nav.active{background:#eaf1ff;color:#1748a3;font-weight:700}
+.content{min-width:0}
+.panel{padding:clamp(16px,3vw,26px);margin-bottom:14px}
+.eyebrow{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.3px}
+.panel h2{margin:4px 0 12px;font-size:23px}
+.muted{color:var(--muted)}
+.word{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #eef1f5}
+.word:last-child{border:0}
+.word .w-main{flex:1;}
+.word .big{font-size:20px;font-weight:800;direction:ltr;text-align:left;font-family:Arial,sans-serif;color:var(--navy);}
+.word .w-pron{color:var(--teal);font-weight:700;font-size:14px;margin-top:2px;}
+.word .w-ar{color:var(--ink);font-size:15px;font-weight:600;margin-top:2px;}
+.word .w-ex{direction:ltr;text-align:left;font-family:Arial,sans-serif;color:#475467;font-size:13px;margin-top:6px;background:#f8fafc;padding:6px 10px;border-radius:6px;border-right:3px solid #cbd5e1;}
+.word .w-ex-ar{color:var(--muted);font-size:13px;margin-top:4px;}
+.speak{padding:6px 12px;font-size:16px;background:#e9f1ff;color:#1748a3;border:0;border-radius:10px;cursor:pointer;transition:.2s;}
+.speak:hover{background:#d0e2ff;}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:4px;padding:7px;max-height:none;}.nav{white-space:nowrap;width:auto;padding:8px 11px;font-size:13px}.word{flex-direction:column;}.speak{align-self:flex-start;}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="top">
+<div class="brand">✦ English Learning Studio</div>
+<div class="version">قائمة المفردات المصنفة</div>
+</div>
+<h1>مفردات اللغة الإنجليزية (حسب المواضيع)</h1>
+<p>مصنفة حسب المواضيع مع النطق بالعربي والأمثلة المترجمة</p>
+<div class="meta">
+<span>12 موضوعاً</span>
+<span>المستوى: مبتدئ - متوسط</span>
+</div>
+</div></header>
+
+<main><div class="layout">
+<aside class="side" id="sidebar">
+<!-- سيتم إضافة الأزرار هنا عبر JS -->
+</aside>
+<section class="content" id="content">
+<!-- سيتم إضافة المحتوى هنا عبر JS -->
+</section>
+</div></main>
+
+<script>
+// بيانات المفردات (تم تنظيفها وتنسيقها من ملف PDF)
+const data = {
+  "cat1": {
+    title: "1. الموصوفات والصفات العامة",
+    items: [
+      {en:"Haunted", ar:"مسكون", pron:"هونتِد", ex:"Inhabited by ghosts.", exAr:"مسكون بالأشباح."},
+      {en:"Famous", ar:"مشهور", pron:"فايمس", ex:"Known by many people.", exAr:"معروف لدى كثير من الناس."},
+      {en:"Modern", ar:"حديث / عصري", pron:"مودرن", ex:"Related to the present time.", exAr:"مرتبط بالزمن الحاضر."},
+      {en:"Incredibly", ar:"شكل لا يُصدَّق / للغاية", pron:"انكريدبلي", ex:"Extremely.", exAr:"إلى درجة كبيرة جدًا."},
+      {en:"Luxurious", ar:"فاخر", pron:"لكشري", ex:"Very comfortable and expensive.", exAr:"مريح جدًا وغالي الثمن."},
+      {en:"Huge", ar:"ضخم / هائل", pron:"هيوح", ex:"Very large.", exAr:"كبير جدًا."},
+      {en:"Difficult", ar:"صعب", pron:"ديفكلت", ex:"English is not difficult.", exAr:"الإنجليزية ليست صعبة."},
+      {en:"Careful", ar:"حذر / حريص", pron:"كيرفول", ex:"Be careful when driving.", exAr:"كن حذراً عند القيادة."},
+      {en:"Complicated", ar:"معقد / مركب", pron:"كومبليكيد", ex:"This question is complicated.", exAr:"هذا السؤال معقد."},
+      {en:"Active", ar:"نشيط", pron:"اكتيف", ex:"He is an active student.", exAr:"هو طالب نشيط."},
+      {en:"Incredible", ar:"لا يُصدَّق / مذهل", pron:"انكريديبل", ex:"The view was incredible.", exAr:"المنظر كان مذهلاً."},
+      {en:"Cheap", ar:"رخيص", pron:"تشيب", ex:"Low in price.", exAr:"قليل السعر."},
+      {en:"Terrible", ar:"فظيع / سيء جدًا", pron:"تيربل", ex:"Very bad.", exAr:"سيء جداً."},
+      {en:"Recognized", ar:"معروف / معترف به", pron:"ركوغنايزد", ex:"She is recognized as a great doctor.", exAr:"هي معروفة كطبيبة رائعة."},
+      {en:"Old", ar:"قديم", pron:"أولد", ex:"This is an old house.", exAr:"هذا منزل قديم."},
+      {en:"Awful", ar:"فظيع / سيء جدًا", pron:"أوفول", ex:"The weather was awful yesterday.", exAr:"كان الطقس فظيعاً أمس."},
+      {en:"Far", ar:"بعيد", pron:"فار", ex:"My school is not far from home.", exAr:"مدرستي ليست بعيدة عن المنزل."},
+      {en:"Wet", ar:"مبلل / رطب", pron:"ويت", ex:"My shoes are wet.", exAr:"حذائي مبلل."},
+      {en:"Local", ar:"محلي", pron:"لوكل", ex:"We bought food from the local market.", exAr:"اشترينا طعاماً من السوق المحلي."},
+      {en:"Possible", ar:"ممكن", pron:"بوسيل", ex:"Is it possible to finish today?", exAr:"هل من الممكن الانتهاء اليوم؟"},
+      {en:"Real", ar:"حقيقي", pron:"ربل", ex:"Is this gold real?", exAr:"هل هذا الذهب حقيقي؟"},
+      {en:"Formal", ar:"رسمي", pron:"فورمل", ex:"He wore a formal suit.", exAr:"ارتدى بدلة رسمية."},
+      {en:"Popular", ar:"شائع / محبوب", pron:"بوبولر", ex:"Football is very popular.", exAr:"كرة القدم شائعة جداً."},
+      {en:"Dear", ar:"عزيز / محبوب", pron:"دير", ex:"She is my dear friend.", exAr:"هي صديقتي العزيزة."},
+      {en:"Fresh", ar:"طازج", pron:"فريش", ex:"We bought fresh bread.", exAr:"اشترينا خبزاً طازجاً."},
+      {en:"Talented", ar:"موهوب", pron:"تالتند", ex:"She is a talented singer.", exAr:"هي مغنية موهوبة."},
+      {en:"Basic", ar:"أساسي / بسيط", pron:"بابسك", ex:"We learned the basic rules.", exAr:"تعلمنا القواعد الأساسية."},
+      {en:"Sense of humor", ar:"روح الفكاهة", pron:"سنس أوف هيومر", ex:"He has a great sense of humor.", exAr:"لديه حس فكاهة رائع."},
+      {en:"Unusual", ar:"غير عادي", pron:"انيجوال", ex:"It is unusual to see snow here.", exAr:"من غير المألوف رؤية الثلج هنا."}
+    ]
+  },
+  "cat2": {
+    title: "2. الأشخاص والعلاقات",
+    items: [
+      {en:"Ghost", ar:"شبح", pron:"جوست", ex:"The spirit of a dead person.", exAr:"روح شخص مات."},
+      {en:"Detective", ar:"محقق", pron:"ديتكتيف", ex:"A person who investigates crimes.", exAr:"شخص يحقق في الجرائم."},
+      {en:"Teenager", ar:"مراهق", pron:"تيناجر", ex:"A person aged 13-19.", exAr:"شخص عمره بين 13 و 19 سنة."},
+      {en:"Neighbors", ar:"الجيران", pron:"نايبرز", ex:"People who live near you.", exAr:"أشخاص يعيشون بالقرب منك."},
+      {en:"Promise", ar:"وعد / يعد", pron:"برومس", ex:"To say you will do something.", exAr:"أن تقول أنك ستفعل شيئاً."},
+      {en:"Host", ar:"مضيف", pron:"هوست", ex:"The host welcomed us.", exAr:"رحب بنا المضيف."},
+      {en:"Couple", ar:"زوجان", pron:"كابل", ex:"A young couple lives next door.", exAr:"زوجان شابان يعيشان بجوارنا."},
+      {en:"Owner", ar:"مالك", pron:"أونر", ex:"A person who owns something.", exAr:"شخص يملك شيئاً."},
+      {en:"Enemy", ar:"عدو", pron:"إنيبي", ex:"The two countries were enemies.", exAr:"كانت الدولتان أعداء."},
+      {en:"Patient", ar:"مريض / صبور", pron:"بيشنت", ex:"The doctor examined the patient.", exAr:"فحص الطبيب المريض."},
+      {en:"Guest", ar:"ضيف", pron:"جيست", ex:"Our guest arrived early.", exAr:"وصل ضيفنا مبكراً."},
+      {en:"Optimist", ar:"متفائل", pron:"اوبتيمست", ex:"A person who expects good things.", exAr:"شخص يتوقع أموراً جيدة."},
+      {en:"Relationship", ar:"علاقة", pron:"رليشنشيب", ex:"The way people are connected.", exAr:"الطريقة التي يرتبط بها الناس."}
+    ]
+  },
+  "cat3": {
+    title: "3. المنزل وأثاثه",
+    items: [
+      {en:"Apartment", ar:"شقة", pron:"ابارتمنت", ex:"A set of rooms for living.", exAr:"مجموعة غرف للسكن."},
+      {en:"Yard", ar:"فناء / ساحة", pron:"يارد", ex:"The children are playing in the yard.", exAr:"الأطفال يلعبون في الفناء."},
+      {en:"Washing machine", ar:"غسالة ملابس", pron:"ووشينغ ماشين", ex:"The washing machine is new.", exAr:"الغسالة جديدة."},
+      {en:"Wardrobe", ar:"خزانة ملابس", pron:"واردروب", ex:"My clothes are in the wardrobe.", exAr:"ملابسي في الخزانة."},
+      {en:"Fireplace", ar:"مدفأة", pron:"فاير بليس", ex:"We sat by the fireplace.", exAr:"جلسنا بجانب المدفأة."},
+      {en:"Balcony", ar:"شرفة", pron:"بالكوني", ex:"She is standing on the balcony.", exAr:"هي تقف في الشرفة."},
+      {en:"Rug", ar:"سجادة صغيرة", pron:"راج", ex:"There is a rug in the living room.", exAr:"هناك سجادة في غرفة المعيشة."},
+      {en:"Towels", ar:"مناشف", pron:"تاولز", ex:"Please bring clean towels.", exAr:"من فضلك أحضر مناشف نظيفة."},
+      {en:"Garden", ar:"حديقة", pron:"جاردن", ex:"A place where flowers grow.", exAr:"مكان تنمو فيه الأزهار."},
+      {en:"Jar", ar:"إناء زجاجي", pron:"جار", ex:"The cookies are in the jar.", exAr:"البسكويت في الإناء الزجاجي."},
+      {en:"Towel", ar:"منشفة", pron:"تاول", ex:"Dry your hands with a towel.", exAr:"جفف يديك بمنشفة."}
+    ]
+  },
+  "cat4": {
+    title: "4. السياحة والأماكن",
+    items: [
+      {en:"Traffic", ar:"حركة المرور", pron:"ترافيك", ex:"Vehicles moving on roads.", exAr:"مركبات تتحرك على الطرق."},
+      {en:"Transportation", ar:"وسائل النقل", pron:"ترانسوبرتيشن", ex:"The movement of people or goods.", exAr:"حركة الأشخاص أو البضائع."},
+      {en:"Subway", ar:"مترو", pron:"سبواي", ex:"An underground railway.", exAr:"سكة حديد تحت الأرض."},
+      {en:"Abroad", ar:"في الخارج", pron:"ابردو", ex:"In a foreign country.", exAr:"في دولة أجنبية."},
+      {en:"Gate", ar:"بوابة", pron:"جيت", ex:"Please close the gate.", exAr:"من فضلك أغلق البوابة."},
+      {en:"Vacation", ar:"إجازة", pron:"فاكيشن", ex:"We went to Aden for our vacation.", exAr:"ذهبنا إلى عدن في إجازتنا."},
+      {en:"Travel", ar:"يسافر", pron:"ترافل", ex:"I want to travel to Egypt.", exAr:"أريد أن أسافر إلى مصر."},
+      {en:"Attraction", ar:"معلم سياحي", pron:"اتراكشن", ex:"The museum is a popular attraction.", exAr:"المتحف من المعالم السياحية الشهيرة."},
+      {en:"Scenery", ar:"مناظر طبيعية", pron:"سينري", ex:"The mountain scenery is beautiful.", exAr:"المناظر الجبلية جميلة."},
+      {en:"Adventure", ar:"مغامرة", pron:"ادفنجر", ex:"Camping was a great adventure.", exAr:"كان التخييم مغامرة رائعة."},
+      {en:"Airport", ar:"مطار", pron:"ايربورت", ex:"We arrived at the airport early.", exAr:"وصلنا إلى المطار مبكرًا."},
+      {en:"Church", ar:"كنيسة", pron:"تشرش", ex:"They visited the old church.", exAr:"زاروا الكنيسة القديمة."},
+      {en:"Park", ar:"حديقة عامة", pron:"بارك", ex:"We walked in the park.", exAr:"تمشينا في الحديقة."},
+      {en:"Museum", ar:"متحف", pron:"ميوزيوم", ex:"We visited the museum yesterday.", exAr:"زرنا المتحف أمس."},
+      {en:"Parking lot", ar:"موقف سيارات", pron:"باركينج لوت", ex:"The parking lot is full.", exAr:"موقف السيارات ممتلئ."},
+      {en:"Bridge", ar:"جسر", pron:"بريدج", ex:"We crossed the bridge.", exAr:"عبرنا الجسر."},
+      {en:"Town hall", ar:"مبنى البلدية", pron:"تاون هول", ex:"The meeting is at the town hall.", exAr:"الاجتماع في مبنى البلدية."},
+      {en:"Department store", ar:"متجر متعدد الأقسام", pron:"ديبارتمنت ستور", ex:"She bought a dress at the department store.", exAr:"اشترت فستاناً من المتجر."},
+      {en:"Check in / Check out", ar:"تسجيل الوصول / المغادرة", pron:"تشيك إن / تشيك آوت", ex:"We checked in at the hotel.", exAr:"سجلنا دخولنا في الفندق."},
+      {en:"Tickets", ar:"تذاكر", pron:"تيكتس", ex:"We bought two tickets.", exAr:"اشترينا تذكرتين."},
+      {en:"Hotel", ar:"فندق", pron:"هوتيل", ex:"We stayed in a nice hotel.", exAr:"أقمنا في فندق جميل."},
+      {en:"Reservations", ar:"حجوزات", pron:"ريزرفيشنز", ex:"We made reservations for dinner.", exAr:"قمنا بحجز طاولة للعشاء."},
+      {en:"Area", ar:"منطقة", pron:"اريا", ex:"This is a quiet area.", exAr:"هذه منطقة هادئة."},
+      {en:"Souvenir", ar:"تذكار", pron:"سوفينير", ex:"I bought a souvenir from Egypt.", exAr:"اشتريت تذكاراً من مصر."},
+      {en:"Road", ar:"طريق", pron:"رود", ex:"The road is busy today.", exAr:"الطريق مزدحم اليوم."},
+      {en:"Suite", ar:"جناح", pron:"سويت", ex:"They stayed in a luxury suite.", exAr:"أقاموا في جناح فاخر."},
+      {en:"Lounge", ar:"صالة", pron:"لاونج", ex:"We waited in the airport lounge.", exAr:"انتظرنا في صالة المطار."},
+      {en:"Mall", ar:"مركز تسوق", pron:"مول", ex:"We went to the mall yesterday.", exAr:"ذهبنا إلى المركز التجاري أمس."},
+      {en:"Temple", ar:"معبد", pron:"تمبل", ex:"Tourists visited the ancient temple.", exAr:"زار السياح المعبد القديم."},
+      {en:"Railway station", ar:"محطة قطار", pron:"ريل واي ستايشن", ex:"I'll meet you at the railway station.", exAr:"سأقابلك في محطة القطار."},
+      {en:"Location", ar:"موقع / مكان", pron:"لوكيشن", ex:"The hotel has a great location.", exAr:"الفندق ذو موقع رائع."},
+      {en:"Paradise", ar:"جنة / فردوس", pron:"بارادايس", ex:"A perfect or beautiful place.", exAr:"مكان مثالي أو جميل."}
+    ]
+  },
+  "cat5": {
+    title: "5. المطعم والشراب",
+    items: [
+      {en:"Homemade", ar:"مصنوع في البيت", pron:"هوم ميد", ex:"My mother makes homemade bread.", exAr:"والدتي تصنع خبزاً منزلياً."},
+      {en:"Snacks", ar:"وجبات خفيفة", pron:"سناكس", ex:"I bought some snacks.", exAr:"اشتريت بعض الوجبات الخفيفة."},
+      {en:"Mushrooms", ar:"فطر / مشروم", pron:"مشروم", ex:"I like mushrooms on my pizza.", exAr:"أحب الفطر على البيتزا."},
+      {en:"Calories", ar:"سعرات حرارية", pron:"كالوريز", ex:"Fruit has fewer calories than cake.", exAr:"الفاكهة تحتوي على سعرات حرارية أقل من الكعكة."},
+      {en:"Spices", ar:"توابل", pron:"سبايسز", ex:"Yemeni food uses many spices.", exAr:"يستخدم الطعام اليمني الكثير من التوابل."},
+      {en:"Grilled", ar:"مشوي", pron:"جربل", ex:"We ate grilled chicken.", exAr:"أكلنا دجاجاً مشوياً."},
+      {en:"Appetizers", ar:"مقبلات", pron:"أبتايزرز", ex:"We ordered appetizers first.", exAr:"طلبنا المقبلات أولاً."},
+      {en:"Main course", ar:"الطبق الرئيسي", pron:"مين كورس", ex:"Fish was the main course.", exAr:"كان السمك هو الطبق الرئيسي."},
+      {en:"Dessert", ar:"حلوى / تحلية", pron:"ديزرت", ex:"Ice cream is my favorite dessert.", exAr:"الآيس كريم هو الحلوى المفضلة لدي."},
+      {en:"Beer", ar:"بيرة", pron:"بير", ex:"He ordered a beer.", exAr:"طلب بيرة."},
+      {en:"Meal", ar:"وجبة", pron:"ميل", ex:"Breakfast is my favorite meal.", exAr:"الإفطار هو وجبتي المفضلة."},
+      {en:"Steak", ar:"شريحة لحم / ستيك", pron:"ستيك", ex:"He ordered a steak for dinner.", exAr:"طلب شريحة لحم للعشاء."}
+    ]
+  },
+  "cat6": {
+    title: "6. التعليم والعمل والمجتمع",
+    items: [
+      {en:"Working hard", ar:"العمل بجد", pron:"ووركينج هارد", ex:"Putting in a lot of effort.", exAr:"بذل كثير من الجهد."},
+      {en:"Carbon paper", ar:"ورق الكربون", pron:"كاربن بيبر", ex:"Paper used to make copies.", exAr:"ورق يستخدم لعمل نسخ."},
+      {en:"Document", ar:"وثيقة / مستند", pron:"دوكيومنت", ex:"A written or printed paper.", exAr:"ورقة مكتوبة أو مطبوعة."},
+      {en:"Ability", ar:"قدرة", pron:"ابيليتي", ex:"The power or skill to do something.", exAr:"القوة أو المهارة للقيام بشيء."},
+      {en:"Method", ar:"طريقة / أسلوب", pron:"ميثود", ex:"This method is easy.", exAr:"هذه الطريقة سهلة."},
+      {en:"Professional", ar:"محترف / مهني", pron:"بروفشنل", ex:"She is a professional teacher.", exAr:"هي معلمة محترفة."},
+      {en:"Industry", ar:"صناعة", pron:"إندستري", ex:"The car industry is growing.", exAr:"صناعة السيارات تتوسع."},
+      {en:"Classroom", ar:"فصل دراسي", pron:"كالسروم", ex:"The classroom is clean.", exAr:"الفصل نظيف."},
+      {en:"Culture", ar:"ثقافة", pron:"كالشر", ex:"I enjoy learning about Yemeni culture.", exAr:"أستمتع بتعلم الثقافة اليمنية."},
+      {en:"Import", ar:"يستورد", pron:"إمبورت", ex:"Yemen imports many products.", exAr:"اليمن تستورد العديد من المنتجات."},
+      {en:"Coin", ar:"عملة معدنية", pron:"كوين", ex:"He found a coin on the road.", exAr:"وجد قطعة نقدية على الطريق."},
+      {en:"Politics", ar:"سياسة", pron:"بوليتيكس", ex:"He studies politics at university.", exAr:"يدرس السياسة في الجامعة."},
+      {en:"Manager", ar:"مدير", pron:"ماناجر", ex:"The manager helped us.", exAr:"ساعدنا المدير."},
+      {en:"Company", ar:"شركة", pron:"كومباني", ex:"She works for a large company.", exAr:"هي تعمل في شركة كبيرة."},
+      {en:"Learn", ar:"يتعلم", pron:"ليرن", ex:"Children learn quickly.", exAr:"الأطفال يتعلمون بسرعة."},
+      {en:"Government", ar:"حكومة", pron:"جو فيرمنت", ex:"The government announced new plans.", exAr:"أعلنت الحكومة خططاً جديدة."},
+      {en:"Author", ar:"مؤلف / كاتب", pron:"أوثر", ex:"The author wrote many novels.", exAr:"كتب المؤلف العديد من الروايات."},
+      {en:"Report", ar:"تقرير", pron:"ربورت", ex:"She finished the report.", exAr:"أنهت التقرير."},
+      {en:"Material", ar:"مادة / خامة", pron:"ماتيرال", ex:"Wood is a strong material.", exAr:"الخشب مادة قوية."},
+      {en:"Speech", ar:"خطاب", pron:"سبيتش", ex:"The teacher gave a short speech.", exAr:"ألقى المعلم خطاباً قصيراً."}
+    ]
+  },
+  "cat7": {
+    title: "7. التكنولوجيا",
+    items: [
+      {en:"Download", ar:"تحميل / تنزيل", pron:"داولود", ex:"To copy a file from the internet.", exAr:"نسخ ملف من الإنترنت."},
+      {en:"App", ar:"تطبيق", pron:"آب", ex:"A software application.", exAr:"برنامج حاسوبي."},
+      {en:"Post a tweet", ar:"نشر تغريدة", pron:"بوست ا تويت", ex:"To publish a message on X.", exAr:"نشر رسالة على إكس."},
+      {en:"Technological", ar:"تقني / تكنولوجي", pron:"تكنولوجيكال", ex:"Related to technology.", exAr:"متعلق بالتكنولوجيا."},
+      {en:"Newspaper", ar:"صحيفة", pron:"نيوزبيبر", ex:"My father reads the newspaper every morning.", exAr:"والدي يقرأ الصحيفة كل صباح."},
+      {en:"Headphones", ar:"سماعات رأس", pron:"هيدفونز", ex:"I use headphones to study.", exAr:"أستخدم سماعات الرأس للدراسة."},
+      {en:"Attachments", ar:"مرفقات", pron:"أتاتشمنتس", ex:"Please check the attachments.", exAr:"يرجى التحقق من المرفقات."},
+      {en:"Log in", ar:"تسجيل الدخول", pron:"لوغ إن", ex:"Log in with your password.", exAr:"سجّل الدخول بكلمة المرور الخاصة بك."},
+      {en:"Search", ar:"بحث / يبحث", pron:"سيرش", ex:"I searched for my keys.", exAr:"بحثت عن مفاتيحي."},
+      {en:"Online", ar:"متصل بالإنترنت", pron:"أونلاين", ex:"We study online.", exAr:"نحن ندرس عبر الإنترنت."},
+      {en:"Website", ar:"موقع إلكتروني", pron:"ويبسايت", ex:"Visit our website for more information.", exAr:"زر موقعنا لمزيد من المعلومات."},
+      {en:"Wi-Fi", ar:"واي فاي", pron:"واي فاي", ex:"Is the Wi-Fi free here?", exAr:"هل الواي فاي مجاني هنا؟"},
+      {en:"Social network", ar:"شبكة اجتماعية", pron:"سوشيال نتورك", ex:"Instagram is a social network.", exAr:"إنستغرام هو موقع تواصل اجتماعي."}
+    ]
+  },
+  "cat8": {
+    title: "8. الفنون والموسيقى والترفيه",
+    items: [
+      {en:"Cassette", ar:"شريط كاسيت", pron:"كاسيت", ex:"A plastic case with magnetic tape.", exAr:"علبة بلاستيكية تحتوي شريطاً مغناطيسياً."},
+      {en:"Concerts", ar:"حفلات موسيقية", pron:"كونسرتس", ex:"I like going to concerts.", exAr:"أحب الذهاب إلى الحفلات الموسيقية."},
+      {en:"Jazz", ar:"موسيقى الجاز", pron:"جاز", ex:"My father enjoys jazz.", exAr:"والدي يستمتع بموسيقى الجاز."},
+      {en:"Musical instrument", ar:"آلة موسيقية", pron:"ميوزيكال إنسترومنت", ex:"The piano is a musical instrument.", exAr:"البيانو آلة موسيقية."},
+      {en:"Skyfall", ar:"سكاي فول (فيلم)", pron:"سكاي فول", ex:"We watched Skyfall last night.", exAr:"شاهدنا سكاي فول الليلة الماضية."},
+      {en:"Novel", ar:"رواية", pron:"نوفل", ex:"A long fictional book.", exAr:"كتاب قصصي طويل."},
+      {en:"Act", ar:"يتصرف / يمثل", pron:"أكت", ex:"Please act politely.", exAr:"من فضلك تصرف بأدب."},
+      {en:"Artist", ar:"فنان", pron:"أرتست", ex:"The artist painted a beautiful picture.", exAr:"رسم الفنان لوحة جميلة."},
+      {en:"Composers", ar:"ملحنون", pron:"كومبوزرز", ex:"Mozart is one of the greatest composers.", exAr:"موتسارت من أعظم الملحنين."},
+      {en:"Book", ar:"يحجز", pron:"بوك", ex:"I booked a hotel room.", exAr:"حجزت غرفة في فندق."},
+      {en:"Theater", ar:"مسرح", pron:"ثيتر", ex:"A place where plays are performed.", exAr:"مكان تُعرض فيه المسرحيات."},
+      {en:"Album", ar:"ألبوم", pron:"ألبوم", ex:"I bought his new album.", exAr:"اشتريت ألبومه الجديد."},
+      {en:"Series", ar:"مسلسل / سلسلة", pron:"سيريز", ex:"I'm watching a new series.", exAr:"أشاهد مسلسلاً جديداً."},
+      {en:"Nightlife", ar:"حياة ليلية", pron:"نايتلايف", ex:"Dubai has exciting nightlife.", exAr:"دبي تتمتع بحياة ليلية مثيرة."},
+      {en:"Mime", ar:"تمثيل صامت", pron:"مايم", ex:"The mime made everyone laugh.", exAr:"أضحك الممثل الصامت الجميع."},
+      {en:"Fashion", ar:"موضة / أزياء", pron:"فاشن", ex:"Paris is famous for fashion.", exAr:"باريس مشهورة بالموضة."}
+    ]
+  },
+  "cat9": {
+    title: "9. الطبيعة والطقس والصحة",
+    items: [
+      {en:"Temperature", ar:"درجة الحرارة", pron:"تمبريتشر", ex:"The temperature is very high today.", exAr:"درجة الحرارة مرتفعة جداً اليوم."},
+      {en:"Exercise", ar:"تمرين / ممارسة رياضية", pron:"اكسرسايز", ex:"Exercise is good for health.", exAr:"التمارين مفيدة للصحة."},
+      {en:"Relax", ar:"يستريح", pron:"ريلاكس", ex:"I relax after work.", exAr:"أستريح بعد العمل."},
+      {en:"Yoga", ar:"يوغا", pron:"يوغا", ex:"My sister does yoga every morning.", exAr:"أختي تمارس اليوغا كل صباح."},
+      {en:"Weather", ar:"الطقس", pron:"ويذر", ex:"The weather is sunny today.", exAr:"الطقس مشمس اليوم."},
+      {en:"Turtles", ar:"سلاحف", pron:"ترتلز", ex:"We saw turtles at the beach.", exAr:"رأينا سلاحف على الشاطئ."},
+      {en:"Thirsty", ar:"عطشان", pron:"ثيرستي", ex:"I am thirsty after football.", exAr:"أنا عطشان بعد لعب الكرة."},
+      {en:"Healthcare", ar:"الرعاية الصحية", pron:"هيلث كير", ex:"Good healthcare is important.", exAr:"الرعاية الصحية الجيدة مهمة."}
+    ]
+  },
+  "cat10": {
+    title: "10. الحياة اليومية والأفعال",
+    items: [
+      {en:"Celebrate", ar:"يحتفل", pron:"سبلبرت", ex:"To do something special for an event.", exAr:"يفعل شيئاً خاصاً لمناسبة."},
+      {en:"Ritual", ar:"طقس / شعيرة", pron:"ريتشوال", ex:"A regular or religious ceremony.", exAr:"مراسم منتظمة أو دينية."},
+      {en:"Arrive", ar:"يصل", pron:"ارايف", ex:"The train arrived on time.", exAr:"وصل القطار في الوقت المحدد."},
+      {en:"Recommend", ar:"يوصي / ينصح", pron:"ريكومند", ex:"To suggest something.", exAr:"يقترح شيئاً."},
+      {en:"Remember", ar:"يتذكر", pron:"ريمنبر", ex:"To keep something in your mind.", exAr:"يحتفظ بشيء في ذهنه."},
+      {en:"Decide", ar:"يقرر", pron:"ديسايد", ex:"To make a choice.", exAr:"يتخذ خياراً."},
+      {en:"Lifestyle", ar:"أسلوب حياة", pron:"لايف ستايل", ex:"The way a person lives.", exAr:"الطريقة التي يعيش بها الشخص."},
+      {en:"Spend", ar:"ينفق / يقضي", pron:"سبند", ex:"To use money or time.", exAr:"أن تستخدم المال أو الوقت."},
+      {en:"Prepare", ar:"يحضر / يستعد", pron:"بريبار", ex:"To get ready.", exAr:"أن تكون جاهزاً."},
+      {en:"Produces", ar:"ينتج", pron:"بروديوسز", ex:"Makes something.", exAr:"يصنع شيئاً."},
+      {en:"Compare", ar:"يقارن", pron:"كومبار", ex:"To find similarities and differences.", exAr:"إيجاد أوجه الشبه والاختلاف."},
+      {en:"Rush", ar:"يسارع", pron:"راش", ex:"To move quickly.", exAr:"أن تتحرك بسرعة."},
+      {en:"Notice", ar:"يلاحظ", pron:"نوتيس", ex:"To see or become aware of something.", exAr:"أن ترى أو تدرك شيئاً."},
+      {en:"Appointment", ar:"موعد", pron:"ابوينتمنت", ex:"An arranged meeting.", exAr:"اجتماع مرتب."},
+      {en:"Receive", ar:"يتلقى / يستلم", pron:"ريسيف", ex:"I received a package today.", exAr:"استلمت طرداً اليوم."},
+      {en:"Invite", ar:"يدعو", pron:"انفايت", ex:"To ask someone to come.", exAr:"يطلب حضور شخص ما."},
+      {en:"Missed", ar:"فات / لم يلحق", pron:"ميست", ex:"He missed the bus.", exAr:"فاته الحافلة."},
+      {en:"Package", ar:"حزمة / طرد", pron:"باكيج", ex:"A wrapped box.", exAr:"صندوق مغلف."},
+      {en:"Rent", ar:"يستأجر / إيجار", pron:"رينت", ex:"We rent an apartment.", exAr:"نحن نستأجر شقة."},
+      {en:"Move house", ar:"ينتقل إلى منزل جديد", pron:"موف هاوس", ex:"To change your home.", exAr:"تغيير مكان السكن."},
+      {en:"Avoid", ar:"يتجنب", pron:"افويد", ex:"Avoid eating too much sugar.", exAr:"تجنب تناول الكثير من السكر."},
+      {en:"Win a prize", ar:"يفوز بجائزة", pron:"وين ا برايز", ex:"She won a prize in the competition.", exAr:"فازت بجائزة في المسابقة."}
+    ]
+  },
+  "cat11": {
+    title: "11. المشكلات والمخاطر والمشاعر",
+    items: [
+      {en:"Dangerous", ar:"خطير", pron:"دينجرس", ex:"Likely to cause harm.", exAr:"من المرجح أن يسبب ضرراً."},
+      {en:"Hope", ar:"أمل", pron:"هوب", ex:"A feeling that something good will happen.", exAr:"شعور بأن شيئاً جيداً سيحدث."},
+      {en:"Crime", ar:"جريمة", pron:"كرايم", ex:"Stealing is a crime.", exAr:"السرقة جريمة."},
+      {en:"Accident", ar:"حادث", pron:"اكسيدنت", ex:"He had a car accident.", exAr:"تعرض لحادث سيارة."},
+      {en:"Stressful", ar:"مجهِد / مسبب للتوتر", pron:"سترسفول", ex:"My job is stressful.", exAr:"عملي مجهد."},
+      {en:"Excite", ar:"يثير الحماس", pron:"اكسايت", ex:"Good news excites everyone.", exAr:"الأخبار الجيدة تثير حماس الجميع."},
+      {en:"Dream", ar:"حلم / أمنية", pron:"دريم", ex:"My dream is to be a doctor.", exAr:"حلمي أن أصبح طبيباً."},
+      {en:"Interest", ar:"اهتمام", pron:"انترست", ex:"English is my main interest.", exAr:"الإنجليزية اهتمامي الرئيسي."},
+      {en:"Frightened", ar:"خائف / مذعور", pron:"فرايتند", ex:"The little boy was frightened.", exAr:"الولد الصغير كان خائفاً."},
+      {en:"Rob", ar:"يسرق / ينهب", pron:"روب", ex:"The thieves tried to rob the bank.", exAr:"حاول اللصوص سرقة البنك."},
+      {en:"Crisis", ar:"أزمة", pron:"كرايسس", ex:"The country is facing an economic crisis.", exAr:"البلاد تواجه أزمة اقتصادية."},
+      {en:"Peace", ar:"سلام", pron:"بيس", ex:"Everyone wants peace.", exAr:"الجميع يريد السلام."}
+    ]
+  },
+  "cat12": {
+    title: "12. الزمن والكمية والمعالم العامة",
+    items: [
+      {en:"Reputation", ar:"سمعة", pron:"ريبيوتيشن", ex:"The opinion people have about someone.", exAr:"رأي الناس في شخص ما."},
+      {en:"Midnight", ar:"منتصف الليل", pron:"ميدنايت", ex:"Twelve o'clock at night.", exAr:"الساعة الثانية عشرة ليلاً."},
+      {en:"Gap", ar:"فراغ / فجوة", pron:"جاب", ex:"An empty space or opening.", exAr:"مساحة فارغة أو فتحة."},
+      {en:"Experience", ar:"تجربة / خبرة", pron:"اكسبيرنس", ex:"Knowledge gained from doing something.", exAr:"معرفة مكتسبة من فعل شيء."},
+      {en:"Idea", ar:"فكرة / خطة", pron:"ايديا", ex:"A thought or plan.", exAr:"خاطرة أو خطة."},
+      {en:"Miracle", ar:"معجزة", pron:"ميراكال", ex:"An amazing event that seems impossible.", exAr:"حدث مذهل يبدو مستحيلاً."},
+      {en:"In fact", ar:"في الواقع / في الحقيقة", pron:"إن فاكت", ex:"In fact, I know the answer.", exAr:"في الواقع، أنا أعرف الإجابة."},
+      {en:"Weekend", ar:"عطلة نهاية الأسبوع", pron:"ويكند", ex:"We visited our grandparents at the weekend.", exAr:"زرنا أجدادنا في عطلة نهاية الأسبوع."},
+      {en:"Result", ar:"نتيجة", pron:"ريزالت", ex:"I got a good result in the test.", exAr:"حصلت على نتيجة جيدة في الاختبار."},
+      {en:"Season", ar:"فصل", pron:"سيزن", ex:"Spring is my favorite season.", exAr:"الربيع هو فصلي المفضل."},
+      {en:"Century", ar:"قرن", pron:"سنشري", ex:"We live in the 21st century.", exAr:"نعيش في القرن الحادي والعشرين."},
+      {en:"Advantages & Disadvantages", ar:"مزايا وعيوب", pron:"ادفانتجز اند ديسادفاتنجز", ex:"Let's discuss the advantages and disadvantages.", exAr:"دعونا ناقش مزايا وعيوب التعلم عبر الإنترنت."}
+    ]
+  }
+};
+
+// دالة النطق
+function speak(text){
+  if(!('speechSynthesis' in window)){alert('ميزة النطق غير متاحة.');return}
+  speechSynthesis.cancel();
+  let u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = .85;
+  speechSynthesis.speak(u);
+}
+
+// بناء التبويبات
+const sidebar = document.getElementById('sidebar');
+const content = document.getElementById('content');
+let first = true;
+
+Object.keys(data).forEach(key => {
+  const btn = document.createElement('button');
+  btn.className = 'nav' + (first ? ' active' : '');
+  btn.dataset.tab = key;
+  btn.textContent = data[key].title;
+  btn.onclick = () => switchTab(key);
+  sidebar.appendChild(btn);
+
+  const div = document.createElement('div');
+  div.className = 'panel tab' + (first ? '' : ' hidden');
+  div.id = key;
+  
+  let html = `<div class="eyebrow">Vocabulary List</div><h2>${data[key].title}</h2><div style="margin-top:15px;">`;
+  
+  data[key].items.forEach(item => {
+    html += `
+      <div class="word">
+        <div class="w-main">
+          <div class="big">${item.en}</div>
+          <div class="w-pron">${item.pron}</div>
+          <div class="w-ar">${item.ar}</div>
+          <div class="w-ex">${item.ex}</div>
+          <div class="w-ex-ar">${item.exAr}</div>
+        </div>
+        <button class="speak" onclick="speak('${item.en.replace(/'/g, "\\'")}')">🔊</button>
+      </div>
+    `;
+  });
+  
+  html += `</div>`;
+  div.innerHTML = html;
+  content.appendChild(div);
+  first = false;
+});
+
+function switchTab(id){
+  document.querySelectorAll('.nav').forEach(x => x.classList.toggle('active', x.dataset.tab === id));
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('hidden', x.id !== id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

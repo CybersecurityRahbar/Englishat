@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Learning Studio | V0.2</title>
+<style>
+:root{--navy:#172554;--blue:#2563eb;--cyan:#38bdf8;--purple:#8b5cf6;--ink:#172033;--muted:#68738a;--bg:#f4f7fc;--card:#fff;--line:#e5eaf3;--green:#0f9f75;--red:#dc5454}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+button{font:inherit;cursor:pointer;border:0}.app{max-width:1120px;margin:auto;padding:18px}
+header{background:linear-gradient(120deg,#172554,#1e40af 60%,#6d5ce7);color:#fff;border-radius:24px;padding:24px;position:relative;overflow:hidden}
+header:after{content:"Aa";position:absolute;left:5%;top:-30px;font-size:170px;font-weight:900;color:#ffffff12;direction:ltr}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:#7dd3fc;color:#082f49;display:grid;place-items:center;font-size:23px;font-weight:900}.brand small{display:block;color:#c7dcff;font-size:11px;direction:ltr;text-align:right}.tag{background:#ffffff20;border:1px solid #ffffff40;border-radius:30px;padding:7px 12px;font-size:12px}
+.hero{position:relative;z-index:1;padding:28px 0 10px}.hero h1{font-size:clamp(28px,5vw,46px);line-height:1.15;margin:0 0 10px;direction:ltr;text-align:right}.hero h1 span{color:#7dd3fc}.hero p{color:#dbeafe;margin:0;max-width:570px;line-height:1.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin-top:20px;position:relative;z-index:1}.stat{background:#ffffff17;border:1px solid #ffffff20;border-radius:15px;padding:12px}.stat b{display:block;font-size:23px}.stat small{color:#dbeafe}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:18px;margin-top:18px}.sidebar,.panel,.lesson-card,.quiz-card{background:var(--card);border:1px solid var(--line);border-radius:19px;box-shadow:0 6px 22px #1c2d4d08}
+.sidebar{padding:13px;height:max-content;position:sticky;top:12px}.side-title{font-size:12px;color:var(--muted);padding:8px 10px}.nav{width:100%;text-align:right;background:transparent;padding:12px;border-radius:12px;color:#39445b;margin:2px 0;display:flex;align-items:center;gap:10px}.nav.active,.nav:hover{background:#eef4ff;color:#1d4ed8;font-weight:700}.nav .ico{width:25px;text-align:center;font-size:17px}
+main{min-width:0}.panel{padding:22px;min-height:470px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}.section-head h2{margin:0;font-size:24px}.sub{color:var(--muted);font-size:13px;margin-top:5px}.pill{font-size:11px;border-radius:30px;padding:6px 10px;background:#eff6ff;color:#1d4ed8;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.lesson-card{padding:17px;transition:.2s}.lesson-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px #1c2d4d12}.lesson-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:21px;margin-bottom:12px;background:#eff6ff}.lesson-card h3{margin:0 0 6px}.lesson-card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 13px}.btn{background:var(--blue);color:white;border-radius:11px;padding:10px 15px;font-weight:650}.btn:hover{filter:brightness(.95)}.btn.secondary{background:#edf2fa;color:#27344d}.btn.light{background:#e9f7ff;color:#075985}.btn.small{padding:7px 11px;font-size:12px}
+.progress-wrap{background:#edf1f7;height:9px;border-radius:20px;overflow:hidden}.progress-bar{height:100%;background:linear-gradient(90deg,#38bdf8,#6366f1);width:0%;transition:.3s}
+.callout{background:linear-gradient(110deg,#eff6ff,#f5f3ff);border:1px solid #dbeafe;padding:17px;border-radius:16px;margin:15px 0}.callout b{display:block;margin-bottom:5px}.callout p{margin:0;color:#53627a;font-size:13px;line-height:1.8}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:right}.table th{color:#64748b;background:#f8fafc}.en{direction:ltr;text-align:left;font-weight:650}
+.example{border:1px solid var(--line);border-radius:13px;padding:12px;margin:9px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.example small{display:block;color:var(--muted);margin-top:4px}
+.word{direction:ltr;text-align:left;font-weight:750}.muted{color:var(--muted);font-size:12px}
+.quiz-card{padding:18px;margin-top:12px}.option{display:block;width:100%;text-align:right;border:1px solid var(--line);background:white;padding:12px;border-radius:12px;margin:8px 0}.option.selected{border-color:#3b82f6;background:#eff6ff}.option.correct{border-color:#16a34a;background:#f0fdf4}.option.wrong{border-color:#dc5454;background:#fff1f2}
+.feedback{padding:12px;border-radius:12px;margin-top:12px;font-size:14px}.good{background:#ecfdf5;color:#047857}.bad{background:#fff1f2;color:#be123c}
+.word-bank,.slots{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip{padding:9px 13px;border-radius:10px;background:#eef2ff;color:#3730a3}.chip.used{opacity:.35;pointer-events:none}.slots{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;min-height:52px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.hidden{display:none!important}
+footer{text-align:center;color:#8a94a7;font-size:11px;padding:20px}
+@media(max-width:760px){.app{padding:10px}.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:7px}.side-title{display:none}.nav{white-space:nowrap;width:auto;flex:0 0 auto;padding:10px}.nav .ico{display:none}.panel{padding:16px}.grid{grid-template-columns:1fr}.hero{padding-top:22px}.stats{max-width:none}.stat{padding:9px}.stat b{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="top">
+  <div class="brand"><div class="logo">A</div><div><strong>ENGLISH STUDIO</strong><small>INTERACTIVE LEARNING</small></div></div>
+  <span class="tag">Prototype · V0.2</span>
+ </div>
+ <div class="hero"><h1>Learn English.<br><span>Your way.</span></h1><p>مساحة تعليمية تفاعلية لتعلّم الإنجليزية خطوة بخطوة، مع شرح مبسط وتدريبات واختبارات فورية.</p></div>
+ <div class="stats">
+  <div class="stat"><b id="statLessons">0/3</b><small>دروس مكتملة</small></div>
+  <div class="stat"><b id="statScore">—</b><small>آخر نتيجة</small></div>
+  <div class="stat"><b>A1</b><small>المستوى الحالي</small></div>
+ </div>
+</header>
+<div class="layout">
+ <aside class="sidebar">
+  <div class="side-title">القائمة الرئيسية</div>
+  <button class="nav active" data-page="home"><span class="ico">⌂</span>الرئيسية</button>
+  <button class="nav" data-page="lessons"><span class="ico">▤</span>الوحدات والدروس</button>
+  <button class="nav" data-page="vocab"><span class="ico">Aa</span>قاموس الكلمات</button>
+  <button class="nav" data-page="practice"><span class="ico">✎</span>التدريب</button>
+  <button class="nav" data-page="exam"><span class="ico">✓</span>الاختبار النهائي</button>
+ </aside>
+ <main>
+  <section class="panel page" id="home">
+   <div class="section-head"><div><h2>مرحباً بك في رحلتك!</h2><div class="sub">ابدأ من الأساسيات، وتقدم حسب سرعتك.</div></div><span class="pill">BEGINNER · A1</span></div>
+   <div class="callout"><b>مسارك التعليمي</b><p>أكمل الدروس ثم انتقل إلى التدريب والاختبار. يتم تحديث تقدمك داخل هذا المتصفح.</p><div class="progress-wrap" style="margin-top:12px"><div class="progress-bar" id="progressBar"></div></div><p id="progressText" style="margin-top:7px">0% من الدروس مكتملة</p></div>
+   <div class="section-head"><div><h2>تابع التعلّم</h2><div class="sub">ثلاثة دروس قصيرة للتجربة.</div></div><button class="btn small" onclick="showPage('lessons')">كل الدروس</button></div>
+   <div class="grid" id="homeCards"></div>
+  </section>
+  <section class="panel page hidden" id="lessons">
+   <div class="section-head"><div><h2>الوحدات والدروس</h2><div class="sub">المحتوى تجريبي وقابل للاستبدال بمحتوى الكتاب.</div></div><span class="pill">3 LESSONS</span></div>
+   <div class="grid" id="lessonCards"></div>
+  </section>
+  <section class="panel page hidden" id="lesson">
+   <button class="btn secondary small" onclick="showPage('lessons')">→ العودة إلى الدروس</button>
+   <div id="lessonContent"></div>
+  </section>
+  <section class="panel page hidden" id="vocab">
+   <div class="section-head"><div><h2>قاموس الكلمات</h2><div class="sub">استمع إلى الكلمة وتعرّف على معناها.</div></div><span class="pill">VOCABULARY</span></div>
+   <input id="searchWord" placeholder="ابحث عن كلمة..." style="width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;font:inherit;margin-bottom:12px">
+   <div id="vocabList"></div>
+  </section>
+  <section class="panel page hidden" id="practice">
+   <div class="section-head"><div><h2>منطقة التدريب</h2><div class="sub">اختبر فهمك بأسئلة قصيرة.</div></div><span class="pill">PRACTICE</span></div>
+   <div id="practiceContent"></div>
+  </section>
+  <section class="panel page hidden" id="exam">
+   <div class="section-head"><div><h2>الاختبار النهائي</h2><div class="sub">خمسة أسئلة من الدروس الثلاثة.</div></div><span class="pill">FINAL QUIZ</span></div>
+   <div id="examContent"></div>
+  </section>
+ </main>
+</div>
+<footer>ENGLISH LEARNING STUDIO · نموذج تعليمي تجريبي V0.2</footer>
+</div>
+<script>
+const lessons=[
+ {id:1,title:"Verb to Be",subtitle:"am · is · are",icon:"🔤",goal:"تكوين جمل بسيطة للتعريف بالنفس ووصف الأشخاص.",body:`<h3>ما هو Verb to Be؟</h3><p>هو فعل نستخدمه للربط بين الشخص أو الشيء والمعلومة التي نصفه بها. في المضارع نستخدم: <b>am / is / are</b>.</p><table class="table"><tr><th>الضمير</th><th>الفعل</th><th>المعنى</th></tr><tr><td class="en">I</td><td class="en">am</td><td>أنا</td></tr><tr><td class="en">He / She / It</td><td class="en">is</td><td>هو / هي / هو لغير العاقل</td></tr><tr><td class="en">You / We / They</td><td class="en">are</td><td>أنت / نحن / هم</td></tr></table><h3>أمثلة</h3><div class="example"><div><div class="word">I am a student.</div><small>أنا طالب.</small></div><button class="btn light small" onclick="speak('I am a student')">🔊 استمع</button></div><div class="example"><div><div class="word">She is happy.</div><small>هي سعيدة.</small></div><button class="btn light small" onclick="speak('She is happy')">🔊 استمع</button></div><div class="example"><div><div class="word">They are friends.</div><small>هم أصدقاء.</small></div><button class="btn light small" onclick="speak('They are friends')">🔊 استمع</button></div><div class="callout"><b>قاعدة النفي</b><p>نضع not بعد فعل be: She is not tired. = هي ليست متعبة.</p></div>`},
+ {id:2,title:"Personal Pronouns",subtitle:"I · You · He · She · It · We · They",icon:"👥",goal:"التعرّف على الضمائر الشخصية واختيار الضمير المناسب.",body:`<h3>ما هي الضمائر الشخصية؟</h3><p>كلمات تحل محل أسماء الأشخاص أو الأشياء حتى لا نكرر الاسم في كل جملة.</p><table class="table"><tr><th>الضمير</th><th>المعنى</th><th>مثال</th></tr><tr><td class="en">I</td><td>أنا</td><td class="en">I am Ali.</td></tr><tr><td class="en">You</td><td>أنت</td><td class="en">You are kind.</td></tr><tr><td class="en">He</td><td>هو</td><td class="en">He is tall.</td></tr><tr><td class="en">She</td><td>هي</td><td class="en">She is a teacher.</td></tr><tr><td class="en">It</td><td>هو/هي لغير العاقل</td><td class="en">It is a book.</td></tr><tr><td class="en">We</td><td>نحن</td><td class="en">We are ready.</td></tr><tr><td class="en">They</td><td>هم</td><td class="en">They are friends.</td></tr></table><div class="callout"><b>تذكّر</b><p>He للذكر، وShe للأنثى، وIt غالباً للأشياء والحيوانات عندما لا نحدد جنسها.</p></div>`},
+ {id:3,title:"A / An / The",subtitle:"Articles",icon:"🧩",goal:"معرفة الفرق بين أدوات التنكير والتعريف.",body:`<h3>أدوات قبل الأسماء</h3><p><b>A</b> و<b>An</b> تعنيان غالباً «واحد / واحدة» عند الحديث عن شيء غير محدد. أما <b>The</b> فتشير إلى شيء محدد ومعروف.</p><table class="table"><tr><th>الأداة</th><th>الاستخدام</th><th>مثال</th></tr><tr><td class="en">A</td><td>قبل صوت ساكن</td><td class="en">a book</td></tr><tr><td class="en">An</td><td>قبل صوت متحرك</td><td class="en">an apple</td></tr><tr><td class="en">The</td><td>شيء محدد</td><td class="en">the door</td></tr></table><div class="example"><div><div class="word">I have a car.</div><small>لدي سيارة.</small></div><button class="btn light small" onclick="speak('I have a car')">🔊 استمع</button></div><div class="example"><div><div class="word">She eats an apple.</div><small>هي تأكل تفاحة.</small></div><button class="btn light small" onclick="speak('She eats an apple')">🔊 استمع</button></div><div class="example"><div><div class="word">Open the door.</div><small>افتح الباب.</small></div><button class="btn light small" onclick="speak('Open the door')">🔊 استمع</button></div><div class="callout"><b>ملاحظة مهمة</b><p>الاختيار بين A وAn يعتمد على الصوت عند بداية الكلمة، وليس الحرف المكتوب فقط.</p></div>`}
+];
+const words=[
+ ["student","طالب","STU-dent"],["teacher","معلّم","TEE-cher"],["friend","صديق","frend"],["happy","سعيد","HAP-ee"],["book","كتاب","book"],["apple","تفاحة","AP-pul"],["car","سيارة","kar"],["house","منزل","hows"],["school","مدرسة","skool"],["family","عائلة","FAM-uh-lee"],["water","ماء","WAW-ter"],["beautiful","جميل","BYOO-tuh-ful"]
+];
+let completed=JSON.parse(localStorage.getItem("els_completed")||"[]"),lastScore=localStorage.getItem("els_score")||"—";
+function updateStats(){document.getElementById("statLessons").textContent=completed.length+"/3";document.getElementById("statScore").textContent=lastScore==="—"?"—":lastScore+"%";let p=Math.round(completed.length/3*100);document.getElementById("progressBar").style.width=p+"%";document.getElementById("progressText").textContent=p+"% من الدروس مكتملة";localStorage.setItem("els_completed",JSON.stringify(completed))}
+function speak(t){if(!("speechSynthesis"in window)){alert("ميزة الصوت غير مدعومة في هذا المتصفح.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.82;speechSynthesis.speak(u)}
+function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="vocab")renderVocab();if(id==="practice")renderPractice();if(id==="exam")renderExam();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function card(l){return `<article class="lesson-card"><div class="lesson-icon">${l.icon}</div><span class="pill">LESSON 0${l.id}</span><h3>${l.title}</h3><p>${l.subtitle}<br>${l.goal}</p><button class="btn small" onclick="openLesson(${l.id})">افتح الدرس ←</button> ${completed.includes(l.id)?'<span class="muted">✓ مكتمل</span>':''}</article>`}
+function renderCards(){document.getElementById("homeCards").innerHTML=lessons.slice(0,2).map(card).join("");document.getElementById("lessonCards").innerHTML=lessons.map(card).join("")}
+function openLesson(id){let l=lessons.find(x=>x.id===id);document.getElementById("lessonContent").innerHTML=`<div style="margin-top:18px"><span class="pill">LESSON 0${l.id}</span><h2>${l.icon} ${l.title}</h2><p class="sub">${l.goal}</p>${l.body}<div class="toolbar"><button class="btn" onclick="markComplete(${id})">✓ أنهيت الدرس</button><button class="btn secondary" onclick="showPage('practice')">انتقل للتدريب</button></div></div>`;showPage("lesson")}
+function markComplete(id){if(!completed.includes(id))completed.push(id);updateStats();renderCards();alert("تم تسجيل الدرس كمكتمل في هذا المتصفح.");}
+function renderVocab(filter=""){let list=words.filter(w=>w[0].includes(filter.toLowerCase())||w[1].includes(filter));document.getElementById("vocabList").innerHTML=list.map(w=>`<div class="example"><div><div class="word">${w[0]}</div><small>${w[1]} · نطق تقريبي: ${w[2]}</small></div><button class="btn light small" onclick="speak('${w[0]}')">🔊 استمع</button></div>`).join("")||'<p class="muted">لا توجد نتائج.</p>'}
+document.getElementById("searchWord").addEventListener("input",e=>renderVocab(e.target.value));
+const practiceQs=[{q:"I ___ a student.",opts:["am","is","are"],a:"am",why:"الضمير I يأخذ am."},{q:"___ is my sister.",opts:["He","She","They"],a:"She",why:"نستخدم She عند الحديث عن أنثى."},{q:"I have ___ apple.",opts:["a","an","the"],a:"an",why:"Apple تبدأ بصوت متحرك، لذلك نستخدم an."}];
+function renderPractice(){document.getElementById("practiceContent").innerHTML=practiceQs.map((q,i)=>`<div class="quiz-card"><b>${i+1}. ${q.q}</b><div>${q.opts.map(o=>`<button class="option" onclick="checkPractice(${i},'${o}',this)">${o}</button>`).join("")}</div><div id="pf${i}"></div></div>`).join("")}
+function checkPractice(i,v,el){let q=practiceQs[i],parent=el.parentElement;parent.querySelectorAll("button").forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add("correct")});if(v!==q.a)el.classList.add("wrong");document.getElementById("pf"+i).innerHTML=`<div class="feedback ${v===q.a?'good':'bad'}">${v===q.a?'إجابة صحيحة ✓':'حاول مرة أخرى في السؤال التالي.'} ${q.why}</div>`}
+const examQs=[{q:"She ___ happy.",o:["am","is","are"],a:"is"},{q:"___ are students.",o:["We","He","It"],a:"We"},{q:"I have ___ orange.",o:["a","an","the"],a:"an"},{q:"He ___ my brother.",o:["am","is","are"],a:"is"},{q:"This is ___ book.",o:["an","a","are"],a:"a"}];
+function renderExam(){let c=document.getElementById("examContent");c.innerHTML=`<p class="sub">اختر إجابة واحدة لكل سؤال، ثم اضغط «احسب النتيجة».</p>`+examQs.map((q,i)=>`<div class="quiz-card"><b>${i+1}. ${q.q}</b>${q.o.map(o=>`<label class="option"><input type="radio" name="exam${i}" value="${o}"> <span dir="ltr">${o}</span></label>`).join("")}</div>`).join("")+`<div class="toolbar"><button class="btn" onclick="gradeExam()">احسب النتيجة</button></div><div id="examResult"></div>`}
+function gradeExam(){let score=0,answered=0;examQs.forEach((q,i)=>{let v=document.querySelector(`input[name="exam${i}"]:checked`);if(v){answered++;if(v.value===q.a)score++}});if(answered<examQs.length){document.getElementById("examResult").innerHTML='<div class="feedback bad">أجب عن جميع الأسئلة أولاً.</div>';return}let pct=Math.round(score/examQs.length*100);lastScore=pct;localStorage.setItem("els_score",pct);updateStats();document.getElementById("examResult").innerHTML=`<div class="callout"><h2 style="margin:0">${score} / ${examQs.length}</h2><p>نتيجتك: ${pct}% — ${pct>=80?"ممتاز، استمر في التقدم.":pct>=60?"جيد، راجع النقاط التي أخطأت فيها.":"راجع الدروس ثم أعد الاختبار."}</p><button class="btn secondary small" onclick="renderExam()">إعادة الاختبار</button></div>`}
+renderCards();updateStats();
+</script>
+</body></html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b4d">
+<title>مفردات الوحدات - English Learning Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+:root{--navy:#172b4d;--blue:#2563eb;--teal:#0f766e;--orange:#f97316;--ink:#172033;--muted:#667085;--bg:#f4f7fb;--line:#e5eaf2;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(120deg,#172b4d,#244b76);color:#fff;padding:22px 18px 26px}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;font-size:18px}
+.version{font-size:12px;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:30px}
+h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:24px 0 8px}
+header p{margin:0;color:#e3edf8}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta span{background:#ffffff18;border:1px solid #ffffff33;padding:5px 10px;border-radius:9px;font-size:13px}
+main{max-width:1100px;margin:18px auto;padding:0 16px 40px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:16px}
+.side,.panel,.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #14213d08}
+.side{padding:12px;height:max-content;position:sticky;top:12px;max-height: 90vh; overflow-y: auto;}
+.nav{width:100%;border:0;background:transparent;text-align:right;padding:10px 12px;border-radius:10px;font:inherit;color:#344054;cursor:pointer;margin-bottom:2px;font-size:14px;}
+.nav.active{background:#eaf1ff;color:#1748a3;font-weight:700}
+.content{min-width:0}
+.panel{padding:clamp(16px,3vw,26px);margin-bottom:14px}
+.eyebrow{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.3px}
+.panel h2{margin:4px 0 12px;font-size:23px}
+.word{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #eef1f5}
+.word:last-child{border:0}
+.word .w-main{flex:1;}
+.word .big{font-size:20px;font-weight:800;direction:ltr;text-align:left;font-family:Arial,sans-serif;color:var(--navy);}
+.word .w-meta{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0;}
+.badge{font-size:11px;padding:2px 7px;border-radius:20px;background:#eef4ff;color:#214e9b;}
+.badge.family{background:#f0fdf4;color:#166534;}
+.word .w-pron{color:var(--teal);font-weight:700;font-size:14px;margin-top:2px;}
+.word .w-ar{color:var(--ink);font-size:15px;font-weight:600;margin-top:2px;}
+.word .w-ex{direction:ltr;text-align:left;font-family:Arial,sans-serif;color:#475467;font-size:13px;margin-top:6px;background:#f8fafc;padding:6px 10px;border-radius:6px;border-right:3px solid #cbd5e1;}
+.word .w-ex-ar{color:var(--muted);font-size:13px;margin-top:4px;}
+.speak{padding:6px 12px;font-size:16px;background:#e9f1ff;color:#1748a3;border:0;border-radius:10px;cursor:pointer;transition:.2s;}
+.speak:hover{background:#d0e2ff;}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:4px;padding:7px;max-height:none;}.nav{white-space:nowrap;width:auto;padding:8px 11px;font-size:13px}.word{flex-direction:column;}.speak{align-self:flex-start;}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="top">
+<div class="brand">✦ English Learning Studio</div>
+<div class="version">مفردات الوحدات 1B</div>
+</div>
+<h1>مفردات الوحدات (مرتبة مع النطق والترجمة)</h1>
+<p>الوحدات 8، 9، 10، و 11-12 مع نوع الكلمة وعائلة الكلمة والأمثلة</p>
+<div class="meta">
+<span>4 وحدات</span>
+<span>المستوى: مبتدئ - متوسط</span>
+</div>
+</div></header>
+
+<main><div class="layout">
+<aside class="side" id="sidebar"></aside>
+<section class="content" id="content"></section>
+</div></main>
+
+<script>
+// بيانات المفردات (تم تلخيصها وتنسيقها من ملف DOCX)
+const data = {
+  "unit8": {
+    title: "Unit 8",
+    items: [
+      {en:"Screen", type:"noun", ar:"شاشة", pron:"سْكرين", family:"to screen", ex:"Her picture appeared on the screen.", exAr:"ظهرت صورتها على الشاشة."},
+      {en:"Murder", type:"noun/verb", ar:"قتل / يقتل", pron:"مِردَر", family:"to murder = يقتل", ex:"Ali murdered his mother; he killed her last week.", exAr:"قتل علي أمه؛ لقد قتلها الأسبوع الماضي."},
+      {en:"Detective", type:"noun", ar:"محقّق", pron:"دِتِكتِف", family:"to detect = يكتشف", ex:"I like Detective Conan stories; he catches criminals in a smart way.", exAr:"أحب قصص المحقق كونان؛ فهو يمسك المجرمين بذكاء."},
+      {en:"Moustache", type:"noun", ar:"شارب", pron:"مَسْتاش", family:"---", ex:"He used to have a moustache.", exAr:"كان لديه شارب في السابق."},
+      {en:"Follow", type:"verb", ar:"يتبع", pron:"فالو", family:"following = مُتبع", ex:"There is a car following us; I am afraid now.", exAr:"هناك سيارة تتبعنا؛ أنا خائف الآن."},
+      {en:"Hate", type:"verb", ar:"يكره", pron:"هيت", family:"hatred = كراهية", ex:"I love football, but I hate basketball.", exAr:"أحب كرة القدم، لكنني أكره كرة السلة."},
+      {en:"Motive", type:"noun", ar:"دافع / سبب", pron:"موتِف", family:"motivation = دافع", ex:"What was Ali's motive for killing his mother?", exAr:"ما دافع علي لقتل أمه؟"},
+      {en:"History", type:"noun", ar:"التاريخ", pron:"هِستَري", family:"historical = تاريخي", ex:"I read books about the history of Yemen.", exAr:"أقرأ كتبًا عن تاريخ اليمن."},
+      {en:"Furniture", type:"noun", ar:"أثاث", pron:"فِرنتشَر", family:"---", ex:"I helped him choose the furniture for his house.", exAr:"ساعدته في اختيار أثاث منزله."},
+      {en:"Neighbors", type:"plural noun", ar:"الجيران", pron:"نيبَرز", family:"neighbor = جار", ex:"My neighbors are really good people.", exAr:"جيراني أناس طيبون فعلًا."},
+      {en:"Dishwasher", type:"noun", ar:"غسالة صحون", pron:"دِش واشَر", family:"---", ex:"I need a dishwasher for all those dishes!", exAr:"أحتاج إلى غسالة صحون لكل تلك الأطباق!"},
+      {en:"County", type:"noun", ar:"مقاطعة / منطقة إدارية", pron:"كاونتي", family:"---", ex:"There are many counties in the US, such as Virginia.", exAr:"توجد مقاطعات كثيرة في الولايات المتحدة، مثل فرجينيا."},
+      {en:"Air conditioning", type:"noun", ar:"تكييف الهواء", pron:"إير كَندِشَنِنغ", family:"---", ex:"It is hot in here; can you turn the air conditioning on?", exAr:"الجو حار هنا؛ هل يمكنك تشغيل المكيّف؟"},
+      {en:"Balcony", type:"noun", ar:"شرفة", pron:"بالكَني", family:"---", ex:"Has your apartment got a balcony?", exAr:"هل في شقتك شرفة؟"},
+      {en:"Apartment", type:"noun", ar:"شقة", pron:"أبارتمِنت", family:"---", ex:"I live in an apartment in that building.", exAr:"أعيش في شقة في ذلك المبنى."},
+      {en:"Haunted", type:"adjective", ar:"مسكون بالأشباح", pron:"هونتِد", family:"to haunt = يطارد كالشبح", ex:"A haunted house is a house that people believe has ghosts.", exAr:"البيت المسكون هو بيت يعتقد الناس أن فيه أشباحًا."},
+      {en:"Appear", type:"verb", ar:"يبدو / يظهر", pron:"أَپير", family:"appearance = مظهر", ex:"He appears to be a good person.", exAr:"يبدو أنه شخص جيد."},
+      {en:"Partygoer", type:"noun", ar:"شخص يذهب إلى الحفلات", pron:"پارتي غوَر", family:"---", ex:"I hate when partygoers come without an invitation.", exAr:"أكره أن يأتي روّاد الحفلات دون دعوة."},
+      {en:"Ballroom", type:"noun", ar:"قاعة رقص", pron:"بول روم", family:"---", ex:"There are no ballrooms in small hotels.", exAr:"لا توجد قاعات رقص في الفنادق الصغيرة."},
+      {en:"Frightened", type:"adjective", ar:"خائف", pron:"فرايتِند", family:"to frighten = يخيف", ex:"Don't be frightened! We are not going to hurt you.", exAr:"لا تخف! لن نؤذيك."},
+      {en:"Complain", type:"verb", ar:"يشتكي", pron:"كَمپلين", family:"complaint = شكوى", ex:"Parents always complain about their kids.", exAr:"يشكو الآباء دائمًا من أطفالهم."},
+      {en:"Situated", type:"adjective", ar:"يقع / موجود في", pron:"سِتشوَيْتِد", family:"situation = وضع", ex:"We stayed in a small town situated just south of Cleveland.", exAr:"أقمنا في بلدة صغيرة تقع جنوب كليفلاند مباشرة."},
+      {en:"Recently", type:"adverb", ar:"مؤخرًا", pron:"ريسَنتلي", family:"recent = حديث", ex:"Recently, some people started using TikTok a lot.", exAr:"بدأ بعض الناس مؤخرًا استخدام تيك توك كثيرًا."},
+      {en:"Enthusiasm", type:"noun", ar:"حماس", pron:"إنثوزيَازَم", family:"enthusiastic = متحمّس", ex:"He showed enthusiasm to learn a new language.", exAr:"أظهر حماسًا لتعلّم لغة جديدة."},
+      {en:"Reputation", type:"noun", ar:"سمعة", pron:"رِپيوتَيْشَن", family:"---", ex:"In her last job, she gained a reputation as a hard worker.", exAr:"اكتسبت في عملها السابق سمعة بأنها مجتهدة."},
+      {en:"Trumpet", type:"noun", ar:"بوق / آلة نفخ", pron:"ترَمپِت", family:"---", ex:"I play the guitar and the trumpet.", exAr:"أعزف الغيتار والبوق."},
+      {en:"Strange", type:"adjective", ar:"غريب", pron:"سترينج", family:"stranger = شخص غريب", ex:"Children must not talk to strangers.", exAr:"يجب ألا يتحدث الأطفال إلى الغرباء."},
+      {en:"Reported", type:"adjective", ar:"مذكور في التقارير", pron:"رِپورتِد", family:"report = تقرير", ex:"According to recent news reports, two of the victims are Americans.", exAr:"وفقًا لتقارير إخبارية حديثة، اثنان من الضحايا أمريكيان."},
+      {en:"Anxious", type:"adjective", ar:"قلق", pron:"آنكشَس", family:"anxiety = قلق", ex:"You are too late; we were anxious for you.", exAr:"لقد تأخرت كثيرًا؛ كنا قلقين عليك."},
+      {en:"Host", type:"noun", ar:"مضيف", pron:"هوست", family:"to host = يستضيف", ex:"Our host was waiting for us at the door.", exAr:"كان مضيفنا ينتظرنا عند الباب."},
+      {en:"Ghost", type:"noun", ar:"شبح", pron:"غوست", family:"---", ex:"They say the young girl's ghost still haunts the house.", exAr:"يقولون إن شبح الفتاة الصغيرة ما زال يظهر في المنزل."},
+      {en:"Perhaps", type:"adverb", ar:"ربما", pron:"پِرهابز", family:"---", ex:"Perhaps he is sick today; he is absent.", exAr:"ربما يكون مريضًا اليوم؛ فهو غائب."},
+      {en:"Award", type:"noun", ar:"جائزة", pron:"أوورد", family:"to award = يمنح جائزة", ex:"The movie has won a number of awards.", exAr:"فاز الفيلم بعدد من الجوائز."},
+      {en:"Fabulous", type:"adjective", ar:"رائع جدًا", pron:"فابيولَس", family:"---", ex:"You look fabulous!", exAr:"تبدو رائعًا!"},
+      {en:"Charity", type:"noun", ar:"جمعية خيرية / عمل خيري", pron:"تشيرِتي", family:"---", ex:"All the money raised by the concert will go to charity.", exAr:"ستذهب كل الأموال التي جمعها الحفل إلى الأعمال الخيرية."},
+      {en:"Guards", type:"plural noun", ar:"حراس", pron:"غاردز", family:"guard = حارس", ex:"There were two security guards outside the building.", exAr:"كان هناك حارسا أمن خارج المبنى."}
+    ]
+  },
+  "unit9": {
+    title: "Unit 9",
+    items: [
+      {en:"Scream", type:"verb", ar:"يصرخ", pron:"سكريم", family:"---", ex:"'Get out!' she screamed.", exAr:"صرخت: «اخرج!»"},
+      {en:"Vegetarian", type:"adjective/noun", ar:"نباتي / شخص نباتي", pron:"ڤِجِتيريان", family:"---", ex:"I am thinking about becoming a vegetarian.", exAr:"أفكر في أن أصبح نباتيًا."},
+      {en:"Delicious", type:"adjective", ar:"لذيذ", pron:"دِلِشَس", family:"---", ex:"My mother's food is delicious.", exAr:"طعام أمي لذيذ."},
+      {en:"Positive", type:"adjective", ar:"إيجابي", pron:"پازِتِڤ", family:"---", ex:"Write down all the positive things about your life.", exAr:"اكتب كل الأشياء الإيجابية في حياتك."},
+      {en:"Addicted", type:"adjective", ar:"مدمن", pron:"أَدِكتِد", family:"---", ex:"My dad is addicted to smoking.", exAr:"أبي مدمن على التدخين."},
+      {en:"Diet", type:"noun", ar:"حمية غذائية", pron:"دايَت", family:"---", ex:"No cake, thanks --- I am on a diet.", exAr:"لا أريد كعكًا، شكرًا؛ أنا أتبع حمية."},
+      {en:"Healthy", type:"adjective", ar:"صحي", pron:"هِيلثي", family:"---", ex:"The importance of healthy eating.", exAr:"أهمية الأكل الصحي."},
+      {en:"Meal", type:"noun", ar:"وجبة", pron:"ميل", family:"---", ex:"Lunch is the most important meal of the day for most people.", exAr:"الغداء أهم وجبة في اليوم لدى معظم الناس."},
+      {en:"Common", type:"adjective", ar:"شائع", pron:"كومَن", family:"---", ex:"Bad dreams are common among children.", exAr:"الأحلام السيئة شائعة بين الأطفال."},
+      {en:"Promise", type:"noun/verb", ar:"وعد / يَعِد", pron:"پرومِس", family:"---", ex:"We promised the teacher we would not be late.", exAr:"وعدنا المعلم أننا لن نتأخر."},
+      {en:"Ingredients", type:"plural noun", ar:"مكوّنات", pron:"إنغريديَنتس", family:"---", ex:"Before cooking any dish, prepare and wash the ingredients well.", exAr:"قبل طبخ أي طبق، جهّز المكونات واغسلها جيدًا."},
+      {en:"Occasion", type:"noun", ar:"مناسبة", pron:"أَكَيْجَن", family:"---", ex:"I have seen Jana with them on several occasions.", exAr:"رأيت جنى معهم في مناسبات عدة."},
+      {en:"Prepare", type:"verb", ar:"يحضّر / يستعد", pron:"پريپير", family:"---", ex:"Prepare yourselves; we have an important match tomorrow.", exAr:"استعدوا؛ لدينا مباراة مهمة غدًا."},
+      {en:"Fascinating", type:"adjective", ar:"مثير للاهتمام", pron:"فاسِنَيْتِنغ", family:"---", ex:"I read a fascinating book; I finished it in one day.", exAr:"قرأت كتابًا ممتعًا وأنهيته في يوم واحد."},
+      {en:"Laundry", type:"noun", ar:"الغسيل", pron:"لوندري", family:"---", ex:"She did the laundry and hung it out to dry.", exAr:"غسلت الملابس وعلّقتها لتجف."},
+      {en:"Detergent", type:"noun", ar:"منظّف / مسحوق غسيل", pron:"دِتِرجَنت", family:"---", ex:"I use a special detergent for washing clothes.", exAr:"أستخدم منظفًا خاصًا لغسل الملابس."},
+      {en:"Dessert", type:"noun", ar:"حلوى بعد الطعام", pron:"دِزِرت", family:"---", ex:"We always have fruit salad as dessert after lunch.", exAr:"نتناول دائمًا سلطة الفواكه كحلوى بعد الغداء."},
+      {en:"Order", type:"verb/noun", ar:"يطلب / طلب", pron:"أوردَر", family:"---", ex:"What did you order? I ordered a chicken burger and soda.", exAr:"ماذا طلبت؟ طلبت برغر دجاج ومشروب صودا."},
+      {en:"Voyage", type:"noun", ar:"رحلة بحرية طويلة", pron:"ڤويِج", family:"---", ex:"The voyage from England to India used to take six months.", exAr:"كانت الرحلة البحرية من إنجلترا إلى الهند تستغرق ستة أشهر."},
+      {en:"Suicide", type:"noun", ar:"انتحار", pron:"سويِسايد", family:"---", ex:"My dad committed suicide when I was seven years old.", exAr:"انتحر أبي عندما كان عمري سبع سنوات."},
+      {en:"Ancient", type:"adjective", ar:"قديم جدًا / عتيق", pron:"إينشَنت", family:"---", ex:"I visited the ancient old Sana'a city.", exAr:"زرت مدينة صنعاء القديمة."},
+      {en:"Rituals", type:"plural noun", ar:"طقوس / عادات متكررة", pron:"رِتشوَلز", family:"---", ex:"My daily ritual of drawing my lunch is at 12 p.m.", exAr:"طقسي اليومي المتعلق بوجبة الغداء يكون الساعة الثانية عشرة ظهرًا."},
+      {en:"Contain", type:"verb", ar:"يحتوي على", pron:"كَن‌تين", family:"---", ex:"The box contains many different books.", exAr:"يحتوي الصندوق على كتب متنوعة كثيرة."},
+      {en:"Spoonful", type:"noun", ar:"ملعقة ممتلئة", pron:"سپونفُل", family:"---", ex:"Two spoonfuls of sugar, please.", exAr:"ملعقتان من السكر، من فضلك."},
+      {en:"Carbonated", type:"adjective", ar:"غازي / مكربن", pron:"كاربَنيتِد", family:"---", ex:"This selection of carbonated waters can be found in most supermarkets.", exAr:"يمكن العثور على هذه المجموعة من المياه الغازية في معظم المتاجر."},
+      {en:"Fact", type:"noun", ar:"حقيقة", pron:"فاكت", family:"---", ex:"The book is full of facts about the World Cup.", exAr:"الكتاب مليء بالحقائق عن كأس العالم."},
+      {en:"Figures", type:"plural noun", ar:"شخصيات بارزة / أرقام", pron:"فِگيَرز", family:"---", ex:"Many amazing figures came to my wedding.", exAr:"حضر زفافي كثير من الشخصيات المميزة."},
+      {en:"Population", type:"noun", ar:"عدد السكان", pron:"پاپيوليشن", family:"---", ex:"India has a population of more than one billion.", exAr:"يبلغ عدد سكان الهند أكثر من مليار."},
+      {en:"Dangerous", type:"adjective", ar:"خطير", pron:"دينجَرَس", family:"---", ex:"Some of these dogs are extremely dangerous.", exAr:"بعض هذه الكلاب خطيرة جدًا."},
+      {en:"Memorize", type:"verb", ar:"يحفظ عن ظهر قلب", pron:"مِمَرايز", family:"---", ex:"I memorize 10 chapters of the Holy Quran.", exAr:"أحفظ عشرة أجزاء من القرآن الكريم."},
+      {en:"Particular", type:"adjective", ar:"محدد / معيّن", pron:"پَرتِكيولَر", family:"---", ex:"You should study one particular language at school.", exAr:"ينبغي أن تدرس لغة محددة في المدرسة."},
+      {en:"Constantly", type:"adverb", ar:"باستمرار", pron:"كونستَنتلي", family:"---", ex:"The English language is constantly changing.", exAr:"اللغة الإنجليزية تتغير باستمرار."},
+      {en:"Master", type:"verb", ar:"يتقن", pron:"ماسْتَر", family:"---", ex:"To master the English language, you should practice it a lot.", exAr:"لكي تتقن اللغة الإنجليزية، ينبغي أن تتدرب عليها كثيرًا."},
+      {en:"Trivia", type:"noun", ar:"معلومات عامة بسيطة / أسئلة ثقافية", pron:"تريڤيا", family:"---", ex:"I like trivia quizzes about historical events.", exAr:"أحب مسابقات المعلومات العامة عن الأحداث التاريخية."}
+    ]
+  },
+  "unit10": {
+    title: "Unit 10",
+    items: [
+      {en:"Inhabited", type:"adjective", ar:"مأهول بالسكان", pron:"إنهابِتِد", family:"---", ex:"Old Yemeni people inhabited the mountains to protect themselves from dangers.", exAr:"سكن اليمنيون القدماء الجبال لحماية أنفسهم من الأخطار."},
+      {en:"Theater", type:"noun", ar:"مسرح", pron:"ثيَتَر", family:"---", ex:"'Bambi' was the first movie I ever saw in the theater.", exAr:"كان «بامبي» أول فيلم شاهدته في السينما."},
+      {en:"Crosswalk", type:"noun", ar:"ممر مشاة", pron:"كروس ووك", family:"---", ex:"The other day, I almost ran down an old man in a crosswalk.", exAr:"في اليوم الآخر كدت أصدم رجلًا مسنًا عند ممر المشاة."},
+      {en:"Middle-aged", type:"adjective", ar:"في منتصف العمر", pron:"مِدِل إيجْد", family:"---", ex:"I met a middle-aged man on the bus.", exAr:"قابلت رجلًا في منتصف العمر في الحافلة."},
+      {en:"Local", type:"adjective/noun", ar:"محلي / شخص من المنطقة", pron:"لوكل", family:"---", ex:"The hospitals are awful, so we travel to India for better hospitals.", exAr:"المستشفيات سيئة، لذلك نسافر إلى الهند للحصول على مستشفيات أفضل."},
+      {en:"Tourist", type:"noun", ar:"سائح", pron:"تورِست", family:"---", ex:"Socotra Island is the best tourist center in Yemen.", exAr:"جزيرة سقطرى أفضل مركز سياحي في اليمن."},
+      {en:"Museum", type:"noun", ar:"متحف", pron:"ميوزيَم", family:"---", ex:"The museum has an amazing collection of early photographs.", exAr:"يضم المتحف مجموعة مذهلة من الصور القديمة."},
+      {en:"Uniform", type:"noun", ar:"زيّ موحّد", pron:"يونِفورم", family:"---", ex:"I cannot enter my school without the uniform.", exAr:"لا أستطيع دخول مدرستي دون الزي الموحد."},
+      {en:"Continent", type:"noun", ar:"قارة", pron:"كونتِنَنت", family:"---", ex:"Asia, Africa, North and South America, Europe, Australia, and Antarctica.", exAr:"آسيا وأفريقيا وأمريكا الشمالية والجنوبية وأوروبا وأستراليا والقارة القطبية الجنوبية."},
+      {en:"Challenge", type:"noun/verb", ar:"تحدٍّ / يتحدى", pron:"تشالِنج", family:"---", ex:"The company is ready to meet the challenges of the next few years.", exAr:"الشركة مستعدة لمواجهة تحديات السنوات القليلة القادمة."},
+      {en:"Environment", type:"noun", ar:"البيئة", pron:"إنڤايرَنمَنت", family:"---", ex:"We need to take real steps to protect the environment.", exAr:"نحتاج إلى اتخاذ خطوات فعلية لحماية البيئة."},
+      {en:"Souvenir", type:"noun", ar:"تذكار", pron:"سوڤِنير", family:"---", ex:"I bought a model of the Eiffel Tower as a souvenir of Paris.", exAr:"اشتريت مجسمًا لبرج إيفل كتذكار من باريس."},
+      {en:"Galleries", type:"plural noun", ar:"معارض فنية", pron:"گالَريز", family:"---", ex:"I know a man who will take us to the city's museums and art galleries.", exAr:"أعرف رجلًا سيأخذنا إلى متاحف المدينة ومعارضها الفنية."},
+      {en:"Fortuneteller", type:"noun", ar:"عرّاف / قارئ كف", pron:"فورتشَن تِلَر", family:"---", ex:"I went to a fortuneteller, and she told me I would get married to Hala Wahhabi.", exAr:"ذهبت إلى عرّافة، وقالت لي إنني سأتزوج هالة وهّابي."},
+      {en:"Fortune", type:"noun", ar:"حظ / ثروة", pron:"فورتشَن", family:"---", ex:"I always have bad fortune; I am not lucky at all.", exAr:"حظي سيئ دائمًا؛ لست محظوظًا إطلاقًا."}
+    ]
+  },
+  "unit11": {
+    title: "Units 11-12",
+    items: [
+      {en:"Bucket list", type:"noun", ar:"قائمة أمنيات قبل الموت", pron:"بَكِت لِست", family:"---", ex:"Swimming with dolphins is one of the things on my bucket list.", exAr:"السباحة مع الدلافين واحدة من الأشياء التي أريد فعلها في حياتي."},
+      {en:"Semester", type:"noun", ar:"فصل دراسي", pron:"سِمِستَر", family:"---", ex:"The first semester of this year at Sana'a University was easy.", exAr:"كان الفصل الدراسي الأول لهذا العام في جامعة صنعاء سهلًا."},
+      {en:"Abroad", type:"adverb", ar:"في الخارج / إلى الخارج", pron:"أَبرود", family:"---", ex:"I will not study in Yemen; I will study abroad.", exAr:"لن أدرس في اليمن؛ سأدرس في الخارج."},
+      {en:"Promise", type:"noun/verb", ar:"وعد / يَعِد", pron:"پرومِس", family:"---", ex:"She has promised to do all she can to help.", exAr:"لقد وعدت أن تفعل كل ما تستطيع للمساعدة."},
+      {en:"Horoscope", type:"noun", ar:"الأبراج الفلكية", pron:"هورَسكوب", family:"---", ex:"Believing in horoscopes in Islam is wrong.", exAr:"الاعتقاد بالأبراج في الإسلام خطأ."},
+      {en:"Subtitle", type:"noun", ar:"ترجمة مكتوبة أسفل الشاشة", pron:"سَبتايتِل", family:"---", ex:"Do you watch movies in Arabic or English subtitles?", exAr:"هل تشاهد الأفلام بترجمة عربية أم إنجليزية؟"},
+      {en:"Episode", type:"noun", ar:"حلقة", pron:"إپِسود", family:"---", ex:"Bab Al-Hara series has 30 episodes.", exAr:"مسلسل باب الحارة لديه 30 حلقة."},
+      {en:"Abilities", type:"plural noun", ar:"قدرات", pron:"أَبِلِتيز", family:"---", ex:"He showed his abilities as a great manager.", exAr:"أظهر قدراته كمدير عظيم."},
+      {en:"Towards", type:"preposition", ar:"باتجاه / نحو", pron:"تَووردز", family:"---", ex:"The dog was running towards me, so I ran fast.", exAr:"كان الكلب يركض نحوي، لذلك ركضت بسرعة."},
+      {en:"Depressing", type:"adjective", ar:"مُحبط / كئيب", pron:"دِپرِسِنغ", family:"---", ex:"The news was depressing; I was so sad.", exAr:"كانت الأخبار محبطة؛ كنت حزينًا جدًا."},
+      {en:"Rent", type:"verb/noun", ar:"يستأجر / إيجار", pron:"رِنت", family:"---", ex:"Most students rent rooms in their second year.", exAr:"يستأجر معظم الطلاب غرفًا في سنتهم الثانية."},
+      {en:"Transportation", type:"noun", ar:"النقل / المواصلات", pron:"ترانسبورتَيْشَن", family:"---", ex:"The city needs to improve its public transportation.", exAr:"تحتاج المدينة إلى تحسين وسائل النقل العام."},
+      {en:"President", type:"noun", ar:"رئيس", pron:"پرِزِدَنت", family:"---", ex:"Barack Obama was the first Black president.", exAr:"كان باراك أوباما أول رئيس أسود."},
+      {en:"Serving", type:"noun/verb form", ar:"تقديم الطعام / يقدّم", pron:"سِرڤِنغ", family:"---", ex:"In this restaurant, the food is always served in 5 minutes.", exAr:"في هذا المطعم يُقدَّم الطعام دائمًا خلال خمس دقائق."},
+      {en:"Salary", type:"noun", ar:"راتب", pron:"سالَري", family:"---", ex:"The average salary for a teacher is $39,000 a year.", exAr:"متوسط راتب المعلم 39 ألف دولار سنويًا."},
+      {en:"Fluent", type:"adjective", ar:"طليق في اللغة", pron:"فلوَنت", family:"---", ex:"She was fluent in English, French, and German.", exAr:"كانت تتحدث الإنجليزية والفرنسية والألمانية بطلاقة."},
+      {en:"Treat", type:"verb", ar:"يعامل / يتعامل مع", pron:"تريت", family:"---", ex:"I always treat poor people in a good way.", exAr:"أعامل الفقراء دائمًا بطريقة جيدة."},
+      {en:"Crisis", type:"noun", ar:"أزمة", pron:"كرايسِس", family:"---", ex:"Yemenis always face gasoline crisis before Ramadan.", exAr:"يواجه اليمنيون دائمًا أزمة بنزين قبل رمضان."},
+      {en:"Visa", type:"noun", ar:"تأشيرة", pron:"ڤيزا", family:"---", ex:"I was still in New York, trying to get a visa to visit Russia.", exAr:"كنت ما أزال في نيويورك وأحاول الحصول على تأشيرة لزيارة روسيا."},
+      {en:"Encyclopedia", type:"noun", ar:"موسوعة", pron:"إنسايكلوپيديا", family:"---", ex:"'Does anyone know when Mozart was born?' 'Look it up in the encyclopedia.'", exAr:"«هل يعرف أحد متى وُلد موتسارت؟» «ابحث عن ذلك في الموسوعة»."},
+      {en:"Genuinely", type:"adverb", ar:"بصدق / حقًا", pron:"جِنيُوِنلي", family:"---", ex:"She is the most genuine person I have ever met.", exAr:"إنها أصدق شخص قابلته في حياتي."},
+      {en:"Urgently", type:"adverb", ar:"بشكل عاجل", pron:"أَرجَنتلي", family:"---", ex:"I have an urgent message for Sam --- where is he?", exAr:"لدي رسالة عاجلة لسام؛ أين هو؟"},
+      {en:"Miracle", type:"noun", ar:"معجزة", pron:"مِرَكَل", family:"---", ex:"It is a miracle you did not die in that car accident.", exAr:"إنها معجزة أنك لم تمت في حادث السيارة ذاك."},
+      {en:"Argument", type:"noun", ar:"جدال / شجار كلامي", pron:"آرگيومَنت", family:"---", ex:"I had an argument with my dad about sleeping late.", exAr:"تجادلت مع أبي بشأن النوم المتأخر."},
+      {en:"Exist", type:"verb", ar:"يوجد", pron:"إگْزِست", family:"---", ex:"A number of his early photographs still exist.", exAr:"ما زال عدد من صوره المبكرة موجودًا."},
+      {en:"Enormous", type:"adjective", ar:"هائل / ضخم جدًا", pron:"إنورمَس", family:"---", ex:"I have an enormous amount of money.", exAr:"لدي مبلغ ضخم من المال."}
+    ]
+  }
+};
+
+// دالة النطق
+function speak(text){
+  if(!('speechSynthesis' in window)){alert('ميزة النطق غير متاحة.');return}
+  speechSynthesis.cancel();
+  let u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = .85;
+  speechSynthesis.speak(u);
+}
+
+// بناء التبويبات
+const sidebar = document.getElementById('sidebar');
+const content = document.getElementById('content');
+let first = true;
+
+Object.keys(data).forEach(key => {
+  const btn = document.createElement('button');
+  btn.className = 'nav' + (first ? ' active' : '');
+  btn.dataset.tab = key;
+  btn.textContent = data[key].title;
+  btn.onclick = () => switchTab(key);
+  sidebar.appendChild(btn);
+
+  const div = document.createElement('div');
+  div.className = 'panel tab' + (first ? '' : ' hidden');
+  div.id = key;
+  
+  let html = `<div class="eyebrow">Vocabulary</div><h2>${data[key].title}</h2><div style="margin-top:15px;">`;
+  
+  data[key].items.forEach(item => {
+    html += `
+      <div class="word">
+        <div class="w-main">
+          <div class="big">${item.en}</div>
+          <div class="w-meta">
+            <span class="badge">${item.type}</span>
+            ${item.family !== '---' ? `<span class="badge family">${item.family}</span>` : ''}
+          </div>
+          <div class="w-pron">${item.pron}</div>
+          <div class="w-ar">${item.ar}</div>
+          <div class="w-ex">${item.ex}</div>
+          <div class="w-ex-ar">${item.exAr}</div>
+        </div>
+        <button class="speak" onclick="speak('${item.en.replace(/'/g, "\\'")}')">🔊</button>
+      </div>
+    `;
+  });
+  
+  html += `</div>`;
+  div.innerHTML = html;
+  content.appendChild(div);
+  first = false;
+});
+
+function switchTab(id){
+  document.querySelectorAll('.nav').forEach(x => x.classList.toggle('active', x.dataset.tab === id));
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('hidden', x.id !== id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
