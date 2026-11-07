@@ -27,3 +27,10 @@ The debug APK is uploaded as the `englishat-debug-apk` Actions artifact.
 ## Prototype references
 
 The five original HTML prototypes (english_learning_studio_v02.html through english_learning_studio_v06.html) remain unchanged as product and content references. They are not used as WebView screens in the native application.
+
+
+## Debug signing and one-time migration
+
+CI debug APKs use a fixed public development-only key so later test builds can update-install over an earlier stable-signed build. This key is not suitable for production release signing.
+
+The first transition from the original 0.1.0 test APK is exceptional: that early artifact used a different runner-generated certificate. Android will not install the new 0.2.0 build over it. Uninstalling 0.1.0 may erase progress stored only on that installation; check for any progress that matters before doing so. Once stable-signed 0.2.0 is installed, later debug updates use the same key.
