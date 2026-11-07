@@ -15,6 +15,21 @@ android {
         versionName = "0.2.0"
     }
 
+    signingConfigs {
+        create("englishatDebug") {
+            storeFile = rootProject.file("signing/englishat-debug.keystore")
+            storePassword = "Englishat-Debug-Only-2026"
+            keyAlias = "englishat-debug"
+            keyPassword = "Englishat-Debug-Only-2026"
+        }
+    }
+
+    buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("englishatDebug")
+        }
+    }
+
     buildFeatures {
         compose = true
     }
