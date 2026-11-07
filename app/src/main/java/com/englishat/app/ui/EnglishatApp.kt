@@ -30,13 +30,11 @@ import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Translate
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -77,6 +75,8 @@ import com.englishat.app.data.LearningContent
 import com.englishat.app.data.LearningProgress
 import com.englishat.app.data.Lesson
 import com.englishat.app.data.VocabularyWord
+import com.englishat.app.data.ReviewRating
+import java.time.LocalDate
 
 private enum class AppTab(val label: String, val icon: ImageVector) {
     Home("الرئيسية", Icons.Filled.Home),
@@ -92,8 +92,10 @@ fun EnglishatApp(
     onSpeak: (String) -> Unit,
     onCompleteLesson: (String) -> Unit,
     onToggleFavorite: (String) -> Unit,
-    onPracticeCompleted: (Int) -> Unit
+    onPracticeCompleted: (Int) -> Unit,
+    onReviewWord: (String, ReviewRating) -> Unit
 ) {
+    var openReviewOnPractice by rememberSaveable { mutableStateOf(false) }
     var selectedTab by rememberSaveable { mutableStateOf(AppTab.Home) }
     var selectedLessonId by rememberSaveable { mutableStateOf<String?>(null) }
 
@@ -144,9 +146,9 @@ fun EnglishatApp(
                     )
                 } else {
                     when (selectedTab) {
-                        AppTab.Home -> HomeScreen(progress, { selectedLessonId = it }, { selectedTab = it })
+                        AppTab.Home -> HomeScreen(progress, { selectedLessonId = it }, { tab, reviewMode -> selectedTab = tab; openReviewOnPractice = reviewMode })
                         AppTab.Learn -> LearnScreen(progress) { selectedLessonId = it }
-                        AppTab.Practice -> PracticeScreen(onPracticeCompleted)
+                        AppTab.Practice -> PracticeScreen(progress, onSpeak, onPracticeCompleted, onReviewWord, openReviewOnPractice)
                         AppTab.Words -> VocabularyScreen(progress, onSpeak, onToggleFavorite)
                         AppTab.Profile -> ProfileScreen(progress)
                     }
@@ -157,7 +159,7 @@ fun EnglishatApp(
 }
 
 @Composable
-private fun HomeScreen(progress: LearningProgress, onContinue: (String) -> Unit, onNavigate: (AppTab) -> Unit) {
+private fun HomeScreen(progress: LearningProgress, onContinue: (String) -> Unit, onNavigate: (AppTab, Boolean) -> Unit) {
     val completed = progress.completedLessons.size.coerceAtMost(LearningContent.lessons.size)
     val percent = completed * 100 / LearningContent.lessons.size
     val nextLesson = LearningContent.lessons.firstOrNull { it.id !in progress.completedLessons } ?: LearningContent.lessons.first()
@@ -191,8 +193,8 @@ private fun HomeScreen(progress: LearningProgress, onContinue: (String) -> Unit,
         item { SectionHeading("ماذا تريد أن تتدرّب؟", "اختر نشاطاً سريعاً") }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                QuickActionCard("اختبر نفسك", "🎯", Modifier.weight(1f)) { onNavigate(AppTab.Practice) }
-                QuickActionCard("راجع الكلمات", "📚", Modifier.weight(1f)) { onNavigate(AppTab.Words) }
+                QuickActionCard("اختبر نفسك", "🎯", Modifier.weight(1f)) { onNavigate(AppTab.Practice, false) }
+                QuickActionCard("مراجعة ذكية", "🧠", Modifier.weight(1f)) { onNavigate(AppTab.Practice, true) }
             }
         }
         item {
@@ -222,7 +224,7 @@ private fun HeroCard(completedPercent: Int, onContinue: () -> Unit) {
                 Surface(color = Color(0x33FFFFFF), shape = RoundedCornerShape(40.dp)) {
                     Text("مسار المبتدئ  ·  A1", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp))
                 }
-                Text("✦ ENGLISHAT", color = Color(0xFFD7E2FF), fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text("ENGLISHAT", color = Color(0xFFD7E2FF), fontSize = 11.sp, fontWeight = FontWeight.Bold)
             }
             Text("كل يوم كلمة،\nوكل يوم خطوة.", color = Color.White, fontSize = 29.sp, lineHeight = 37.sp, fontWeight = FontWeight.ExtraBold)
             Text("تعلّم بطريقة منظمة تجمع الشرح والأمثلة والصوت والتدريب.", color = Color(0xFFDDE7FF), fontSize = 13.sp, lineHeight = 21.sp)
@@ -478,7 +480,7 @@ private fun VocabularyCard(word: VocabularyWord, isFavorite: Boolean, onSpeak: (
                     Icon(Icons.Filled.Favorite, contentDescription = if (isFavorite) "إزالة من المفضلة" else "إضافة للمفضلة", tint = if (isFavorite) Color(0xFFE65B76) else Color(0xFFB9C2D0), modifier = Modifier.size(21.dp))
                 }
                 OutlinedButton(onClick = onSpeak, contentPadding = PaddingValues(horizontal = 9.dp, vertical = 5.dp)) {
-                    Icon(Icons.Filled.VolumeUp, contentDescription = "استمع", modifier = Modifier.size(18.dp))
+                    Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "استمع", modifier = Modifier.size(18.dp))
                 }
             }
             Surface(color = Color(0xFFF7F9FC), shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
@@ -492,88 +494,127 @@ private fun VocabularyCard(word: VocabularyWord, isFavorite: Boolean, onSpeak: (
 }
 
 @Composable
-private fun PracticeScreen(onPracticeCompleted: (Int) -> Unit) {
+private fun PracticeScreen(progress: LearningProgress, onSpeak: (String) -> Unit, onPracticeCompleted: (Int) -> Unit, onReviewWord: (String, ReviewRating) -> Unit, startWithReview: Boolean) {
+    var selectedMode by rememberSaveable { mutableStateOf(if (startWithReview) "review" else "quiz") }
+    LaunchedEffect(startWithReview) { if (startWithReview) selectedMode = "review" }
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Text("التدريب الذكي", color = Color(0xFF17223B), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+        Text("تدرّب على القواعد وراجع الكلمات في الوقت المناسب.", color = Color(0xFF7D889E), fontSize = 13.sp)
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = selectedMode == "quiz", onClick = { selectedMode = "quiz" }, label = { Text("اختبار سريع") }, modifier = Modifier.weight(1f))
+            FilterChip(selected = selectedMode == "review", onClick = { selectedMode = "review" }, label = { Text("مراجعة الكلمات") }, modifier = Modifier.weight(1f))
+        }
+        if (selectedMode == "review") ReviewFlashcards(progress, onSpeak, onReviewWord) else QuizPractice(onPracticeCompleted)
+    }
+}
+
+@Composable
+private fun ReviewFlashcards(progress: LearningProgress, onSpeak: (String) -> Unit, onReviewWord: (String, ReviewRating) -> Unit) {
+    val today = LocalDate.now().toEpochDay()
+    val deck = remember {
+        LearningContent.vocabulary.filter { word ->
+            val state = progress.reviewCards[word.word]
+            state == null || state.dueEpochDay <= today
+        }.take(10)
+    }
+    var index by rememberSaveable { mutableIntStateOf(0) }
+    var revealed by rememberSaveable { mutableStateOf(false) }
+    val current = deck.getOrNull(index)
+    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = Color.White), border = BorderStroke(1.dp, Color(0xFFE7ECF4))) {
+        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            if (current == null) {
+                Text(if (deck.isEmpty()) "أحسنت! لا توجد كلمات مستحقة الآن." else "ممتاز! أنهيت مراجعة اليوم.", color = Color(0xFF126B58), fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, textAlign = TextAlign.Center)
+                Text(if (deck.isEmpty()) "عد لاحقاً عندما يحين موعد المراجعة التالية." else "كل كلمة راجعتها حُفظ موعد مراجعتها القادم.", color = Color(0xFF758199), fontSize = 13.sp, textAlign = TextAlign.Center)
+                Text("📚", fontSize = 42.sp)
+            } else {
+                Text("مراجعة متباعدة · " + (index + 1) + " / " + deck.size, color = Color(0xFF7D889E), fontSize = 12.sp)
+                Box(Modifier.fillMaxWidth().height(7.dp).clip(CircleShape).background(Color(0xFFE6EAF2))) {
+                    Box(Modifier.fillMaxWidth((index + 1f) / deck.size).height(7.dp).clip(CircleShape).background(Color(0xFF16A58A)))
+                }
+                Text(current.category + "  ·  " + current.type, color = Color(0xFF159078), fontSize = 11.sp)
+                Text(current.word, color = Color(0xFF1D3155), fontSize = 30.sp, fontWeight = FontWeight.ExtraBold, textAlign = TextAlign.Center)
+                OutlinedButton(onClick = { onSpeak(current.word) }) {
+                    Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "استمع", modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("استمع إلى النطق")
+                }
+                if (revealed) {
+                    Surface(color = Color(0xFFF0F6FF), shape = RoundedCornerShape(15.dp), modifier = Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(current.meaning, color = Color(0xFF204A9C), fontSize = 19.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                            Text("النطق التقريبي: " + current.pronunciation, color = Color(0xFF64738E), fontSize = 12.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                            Text(current.example, color = Color(0xFF34445F), fontSize = 14.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                            Text(current.exampleArabic, color = Color(0xFF7D889E), fontSize = 12.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                            OutlinedButton(onClick = { onSpeak(current.example) }, modifier = Modifier.fillMaxWidth()) { Text("استمع إلى المثال") }
+                        }
+                    }
+                    Text("قيّم مدى تذكّرك للكلمة:", color = Color(0xFF68748C), fontSize = 12.sp)
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Button(onClick = { onReviewWord(current.word, ReviewRating.AGAIN); revealed = false; index++ }, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFE8E8), contentColor = Color(0xFFB34350)), contentPadding = PaddingValues(horizontal = 5.dp, vertical = 10.dp)) { Text("صعبة", fontSize = 12.sp) }
+                        Button(onClick = { onReviewWord(current.word, ReviewRating.GOOD); revealed = false; index++ }, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE8F1FF), contentColor = Color(0xFF245BDB)), contentPadding = PaddingValues(horizontal = 5.dp, vertical = 10.dp)) { Text("تذكّرتها", fontSize = 12.sp) }
+                        Button(onClick = { onReviewWord(current.word, ReviewRating.EASY); revealed = false; index++ }, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE4F7EF), contentColor = Color(0xFF13725D)), contentPadding = PaddingValues(horizontal = 5.dp, vertical = 10.dp)) { Text("سهلة", fontSize = 12.sp) }
+                    }
+                } else {
+                    Button(onClick = { revealed = true }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) { Text("أظهر المعنى والإجابة") }
+                }
+            }
+        }
+    }
+    Surface(color = Color(0xFFEAF7F3), shape = RoundedCornerShape(15.dp), modifier = Modifier.fillMaxWidth()) {
+        Text("الكلمات التي تجدها صعبة ستعود للمراجعة قريباً، أما الكلمات التي تتذكرها بسهولة فستتباعد مراجعتها تدريجياً.", Modifier.padding(13.dp), color = Color(0xFF416D64), fontSize = 12.sp, lineHeight = 20.sp)
+    }
+}
+
+@Composable
+private fun QuizPractice(onPracticeCompleted: (Int) -> Unit) {
     var questionIndex by rememberSaveable { mutableIntStateOf(0) }
     var selectedIndex by rememberSaveable { mutableIntStateOf(-1) }
     var score by rememberSaveable { mutableIntStateOf(0) }
     var recorded by rememberSaveable { mutableStateOf(false) }
     val questions = LearningContent.questions
     val finished = questionIndex >= questions.size
-
     LaunchedEffect(finished) {
         if (finished && !recorded) {
             onPracticeCompleted(score)
             recorded = true
         }
     }
-
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
-        Text("تحدّي اليوم", color = Color(0xFF17223B), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
-        Text("أسئلة قصيرة تساعدك على تثبيت ما تعلمته.", color = Color(0xFF7D889E), fontSize = 13.sp)
-        if (finished) {
-            Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF7F3))) {
-                Column(Modifier.fillMaxWidth().padding(23.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(11.dp)) {
-                    Text("🏆", fontSize = 42.sp)
-                    Text("أحسنت! انتهى التدريب", color = Color(0xFF126B58), fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                    Text(score.toString() + " من " + questions.size + " إجابات صحيحة", color = Color(0xFF416D64), fontSize = 15.sp)
-                    Button(onClick = {
-                        questionIndex = 0
-                        selectedIndex = -1
-                        score = 0
-                        recorded = false
-                    }) { Text("إعادة التدريب") }
+    if (finished) {
+        Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF7F3))) {
+            Column(Modifier.fillMaxWidth().padding(23.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(11.dp)) {
+                Text("🏆", fontSize = 42.sp)
+                Text("أحسنت! انتهى التدريب", color = Color(0xFF126B58), fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                Text(score.toString() + " من " + questions.size + " إجابات صحيحة", color = Color(0xFF416D64), fontSize = 15.sp)
+                Button(onClick = { questionIndex = 0; selectedIndex = -1; score = 0; recorded = false }) { Text("إعادة التدريب") }
+            }
+        }
+    } else {
+        val question = questions[questionIndex]
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+            Text("السؤال " + (questionIndex + 1) + " من " + questions.size, color = Color(0xFF76839A), fontSize = 12.sp)
+            Text("النقاط: " + score, color = Color(0xFF245BDB), fontWeight = FontWeight.Bold)
+        }
+        Box(Modifier.fillMaxWidth().height(8.dp).clip(CircleShape).background(Color(0xFFE6EAF2))) {
+            Box(Modifier.fillMaxWidth((questionIndex + 1f) / questions.size).height(8.dp).clip(CircleShape).background(Color(0xFF16A58A)))
+        }
+        Card(shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = Color.White), border = BorderStroke(1.dp, Color(0xFFE7ECF4))) {
+            Column(Modifier.fillMaxWidth().padding(19.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
+                Text("اختر الإجابة الصحيحة", color = Color(0xFF8A95A9), fontSize = 12.sp)
+                Text(question.question, color = Color(0xFF1D3155), fontWeight = FontWeight.ExtraBold, fontSize = 21.sp, lineHeight = 30.sp)
+                question.options.forEachIndexed { index, option ->
+                    val isCorrect = index == question.correctIndex
+                    val chosen = selectedIndex == index
+                    val bg = when { selectedIndex == -1 -> Color(0xFFF7F9FC); isCorrect -> Color(0xFFE4F7EF); chosen -> Color(0xFFFFE9EB); else -> Color(0xFFF7F9FC) }
+                    val border = when { selectedIndex == -1 -> Color(0xFFE5EAF2); isCorrect -> Color(0xFF72C9A8); chosen -> Color(0xFFE78A95); else -> Color(0xFFE5EAF2) }
+                    Surface(Modifier.fillMaxWidth().clip(RoundedCornerShape(13.dp)).clickable(enabled = selectedIndex == -1) { selectedIndex = index; if (isCorrect) score++ }, color = bg, shape = RoundedCornerShape(13.dp), border = BorderStroke(1.dp, border)) {
+                        Text(option, Modifier.fillMaxWidth().padding(14.dp), color = Color(0xFF35445D), fontWeight = FontWeight.SemiBold)
+                    }
                 }
-            }
-        } else {
-            val question = questions[questionIndex]
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                Text("السؤال " + (questionIndex + 1) + " من " + questions.size, color = Color(0xFF76839A), fontSize = 12.sp)
-                Text("النقاط: " + score, color = Color(0xFF245BDB), fontWeight = FontWeight.Bold)
-            }
-            Box(Modifier.fillMaxWidth().height(8.dp).clip(CircleShape).background(Color(0xFFE6EAF2))) {
-                Box(Modifier.fillMaxWidth((questionIndex + 1f) / questions.size).height(8.dp).clip(CircleShape).background(Color(0xFF16A58A)))
-            }
-            Card(shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = Color.White), border = BorderStroke(1.dp, Color(0xFFE7ECF4))) {
-                Column(Modifier.fillMaxWidth().padding(19.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
-                    Text("اختر الإجابة الصحيحة", color = Color(0xFF8A95A9), fontSize = 12.sp)
-                    Text(question.question, color = Color(0xFF1D3155), fontWeight = FontWeight.ExtraBold, fontSize = 21.sp, lineHeight = 30.sp)
-                    question.options.forEachIndexed { index, option ->
-                        val isCorrect = index == question.correctIndex
-                        val chosen = selectedIndex == index
-                        val bg = when {
-                            selectedIndex == -1 -> Color(0xFFF7F9FC)
-                            isCorrect -> Color(0xFFE4F7EF)
-                            chosen -> Color(0xFFFFE9EB)
-                            else -> Color(0xFFF7F9FC)
-                        }
-                        val border = when {
-                            selectedIndex == -1 -> Color(0xFFE5EAF2)
-                            isCorrect -> Color(0xFF72C9A8)
-                            chosen -> Color(0xFFE78A95)
-                            else -> Color(0xFFE5EAF2)
-                        }
-                        Surface(
-                            Modifier.fillMaxWidth().clip(RoundedCornerShape(13.dp)).clickable(enabled = selectedIndex == -1) {
-                                selectedIndex = index
-                                if (isCorrect) score++
-                            },
-                            color = bg, shape = RoundedCornerShape(13.dp), border = BorderStroke(1.dp, border)
-                        ) {
-                            Text(option, Modifier.fillMaxWidth().padding(14.dp), color = Color(0xFF35445D), fontWeight = FontWeight.SemiBold)
-                        }
+                if (selectedIndex != -1) {
+                    Surface(color = Color(0xFFF0F7F4), shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) {
+                        Text((if (selectedIndex == question.correctIndex) "إجابة صحيحة ✓  " else "ليست الإجابة الصحيحة.  ") + question.explanation, Modifier.padding(12.dp), color = Color(0xFF26735E), fontSize = 12.sp, lineHeight = 20.sp)
                     }
-                    if (selectedIndex != -1) {
-                        Surface(color = Color(0xFFF0F7F4), shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) {
-                            Text(
-                                (if (selectedIndex == question.correctIndex) "إجابة صحيحة ✓  " else "ليست الإجابة الصحيحة.  ") + question.explanation,
-                                Modifier.padding(12.dp), color = Color(0xFF26735E), fontSize = 12.sp, lineHeight = 20.sp
-                            )
-                        }
-                        Button(
-                            onClick = { questionIndex++; selectedIndex = -1 },
-                            modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)
-                        ) { Text(if (questionIndex == questions.lastIndex) "عرض النتيجة" else "السؤال التالي") }
-                    }
+                    Button(onClick = { questionIndex++; selectedIndex = -1 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) { Text(if (questionIndex == questions.lastIndex) "عرض النتيجة" else "السؤال التالي") }
                 }
             }
         }
