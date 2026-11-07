@@ -44,8 +44,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          old_cert=$(apksigner verify --print-certs artifacts/previous/app-debug.apk | awk -F': ' '/certificate SHA-256 digest:/ {print $2; exit}')
-          new_cert=$(apksigner verify --print-certs artifacts/current/app-debug.apk | awk -F': ' '/certificate SHA-256 digest:/ {print $2; exit}')
+          APKSIGNER="$ANDROID_HOME/build-tools/36.0.0/apksigner"
+          old_cert=$("$APKSIGNER" verify --print-certs artifacts/previous/app-debug.apk | awk -F': ' '/certificate SHA-256 digest:/ {print $2; exit}')
+          new_cert=$("$APKSIGNER" verify --print-certs artifacts/current/app-debug.apk | awk -F': ' '/certificate SHA-256 digest:/ {print $2; exit}')
           echo "Previous certificate: $old_cert"
           echo "Current certificate:  $new_cert"
           if [[ -z "$old_cert" || -z "$new_cert" ]]; then
