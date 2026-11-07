@@ -5,7 +5,7 @@ plugins {
 }
 android {
     namespace = "com.englishat.app"
-    compileSdk = 37
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.englishat.app"
         minSdk = 26

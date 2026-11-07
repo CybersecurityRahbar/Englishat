@@ -92,8 +92,9 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - No recorded native audio assets, speech-recognition assessment, pronunciation scoring, listening passages, writing correction, placement test, user accounts, cloud sync, or content management backend yet.
 - Browser speech synthesis has been replaced with Android TextToSpeech. Voice availability and quality depend on the device's installed English voice data.
 - Textbook-derived content needs ownership/licensing review and editorial QA.
-- The first GitHub Actions run (2026-11-07, run 42373948824) stopped in the Android SDK setup action before Gradle ran: that action tried to install the obsolete SDK package `tools`, which is no longer published. The workflow was changed to request only `platform-tools` from the setup action; the next run must confirm the Android SDK install and actual Kotlin/Gradle compilation.
-- This first CI failure was an environment setup problem, not evidence of a Kotlin compilation error; the build task was skipped, so app compilation remains unverified.
+- The first GitHub Actions run (2026-11-07, run 42373948824) stopped in the Android SDK setup action before Gradle ran: that action tried to install the obsolete SDK package `tools`, which is no longer published. The workflow was changed to request only `platform-tools` from the setup action.
+- The second run (ID 42374071869) passed checkout, Java, Gradle, and Android SDK setup, but failed because this runner's SDK repository did not contain `platforms;android-37`. The Gradle build step was skipped. The app's compile SDK and CI package request were therefore changed to the available stable Android 36 platform, while targetSdk and build-tools remain at 36.
+- Neither failed run reached Kotlin compilation; compilation and APK generation are still unverified.
 - Add automated unit/UI tests and accessibility checks.
 - Expand lessons and CEFR can-do objectives; add spaced-repetition scheduling for vocabulary; add listening and speaking practice.
 - Design later A2/B1 content only after A1 content is reviewed and assessed.
@@ -112,3 +113,11 @@ The repository initially contained a minimal README and five HTML prototypes. Al
 - The run failed inside `android-actions/setup-android@v3` because its default package list included the retired SDK package `tools`; `sdkmanager` returned “Failed to find package 'tools'”. The explicit SDK install and Gradle build steps were skipped.
 - Updated the workflow input to `packages: platform-tools` so the setup action no longer requests the obsolete package. The next workflow run is required to verify SDK installation and the actual APK compilation.
 - Do not claim that an APK is available until the workflow finishes successfully and the uploaded artifact is confirmed.
+
+
+## 9. Android SDK compatibility adjustment — 2026-11-07
+
+- The second CI run (ID 42374071869) confirmed the obsolete `tools` package issue was fixed and Android SDK setup completed.
+- The explicit SDK install then failed with `Failed to find package 'platforms;android-37'`; no Gradle build was attempted.
+- To align the build with an SDK platform actually available from the runner's configured repository, changed `compileSdk` and the CI SDK install to Android 36. `targetSdk` and Build Tools stay at 36.
+- The next Actions run must establish whether Android 36 installs successfully and expose any real Kotlin or dependency compilation errors.
