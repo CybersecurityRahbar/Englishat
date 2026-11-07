@@ -185,3 +185,15 @@ The user tested the first APK and approved the direction as a good start. This i
 - The new GitHub Actions build must pass before the new APK is offered.
 - Device retest is required for launcher-icon masking, update-install, RTL layout, voice playback, quiz behavior, and spaced-review persistence.
 - The review scheduler is an initial offline spaced-repetition implementation; it is not a full adaptive learning engine or pronunciation assessment.
+
+
+## 14. Englishat 0.2.0 build — 2026-11-07
+
+- The product expansion changes were committed directly to `main`.
+- The latest Actions run for the full 0.2.0 tree is run ID `42379465477`: https://github.com/CybersecurityRahbar/Englishat/actions/runs/42379465477
+- The build job passed Android SDK setup, dependency checks, Kotlin/Compose compilation, APK packaging, and artifact upload.
+- Artifact: `englishat-debug-apk`, artifact ID `13576379921`, ZIP SHA-256 `ebadd9f5eeca8ca1ae07e64ed18476b7c7bb6f01330212265dbb74bfd987ca1a`.
+- The artifact ZIP was downloaded and its integrity check passed. It contains `app-debug.apk` (19,441,841 bytes); the package was recognized as a valid Android APK.
+- APK SHA-256: `b73243bdfd01356533b4b68ff71e038d16bb3b5f73b88febfe0c068d88cec5b5`.
+- Version code is now 2 and version name is 0.2.0. A device-side update-install and runtime test is still outstanding.
+- The APK was built successfully, but no claim is made yet about matching the signing certificate of the earlier 0.1.0 artifact. A one-time CI signature comparison has been added to verify update compatibility before advising installation over the previous version.
