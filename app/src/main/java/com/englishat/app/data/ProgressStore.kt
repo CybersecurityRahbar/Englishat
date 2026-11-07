@@ -17,9 +17,13 @@ import java.time.LocalDate
 
 private val Context.englishatDataStore by preferencesDataStore(name = "englishat_progress")
 
+data class ReviewCardState(val stage: Int, val dueEpochDay: Long)
+enum class ReviewRating { AGAIN, GOOD, EASY }
+
 data class LearningProgress(
     val completedLessons: Set<String> = emptySet(),
     val favorites: Set<String> = emptySet(),
+    val reviewCards: Map<String, ReviewCardState> = emptyMap(),
     val xp: Int = 0,
     val streak: Int = 0
 )
@@ -28,18 +32,24 @@ class ProgressStore(context: Context) {
     private val store: DataStore<Preferences> = context.applicationContext.englishatDataStore
     private val completedKey = stringSetPreferencesKey("completed_lessons")
     private val favoritesKey = stringSetPreferencesKey("favorite_words")
+    private val reviewCardsKey = stringSetPreferencesKey("review_cards")
     private val xpKey = intPreferencesKey("xp")
     private val streakKey = intPreferencesKey("streak")
     private val lastStudyDayKey = longPreferencesKey("last_study_day")
 
     val progress: Flow<LearningProgress> = store.data
-        .catch { error ->
-            if (error is IOException) emit(emptyPreferences()) else throw error
-        }
+        .catch { error -> if (error is IOException) emit(emptyPreferences()) else throw error }
         .map { prefs ->
+            val cards = (prefs[reviewCardsKey] ?: emptySet()).mapNotNull { record ->
+                val parts = record.split('|')
+                val stage = parts.getOrNull(1)?.toIntOrNull()
+                val dueDay = parts.getOrNull(2)?.toLongOrNull()
+                if (parts.size == 3 && stage != null && dueDay != null) parts[0] to ReviewCardState(stage, dueDay) else null
+            }.toMap()
             LearningProgress(
                 completedLessons = prefs[completedKey] ?: emptySet(),
                 favorites = prefs[favoritesKey] ?: emptySet(),
+                reviewCards = cards,
                 xp = prefs[xpKey] ?: 0,
                 streak = prefs[streakKey] ?: 0
             )
@@ -70,12 +80,40 @@ class ProgressStore(context: Context) {
         }
     }
 
+    suspend fun recordReview(word: String, rating: ReviewRating) {
+        val today = LocalDate.now().toEpochDay()
+        val goodIntervals = longArrayOf(1, 3, 7, 14, 30, 60)
+        val easyIntervals = longArrayOf(3, 7, 14, 30, 60, 90)
+        store.edit { prefs ->
+            val records = prefs[reviewCardsKey] ?: emptySet()
+            val previous = records.firstOrNull { it.substringBefore('|') == word }
+            val stage = previous?.split('|')?.getOrNull(1)?.toIntOrNull()?.coerceIn(0, 5) ?: 0
+            val nextStage = when (rating) {
+                ReviewRating.AGAIN -> 0
+                ReviewRating.GOOD, ReviewRating.EASY -> (stage + 1).coerceAtMost(5)
+            }
+            val interval = when (rating) {
+                ReviewRating.AGAIN -> 0L
+                ReviewRating.GOOD -> goodIntervals[stage]
+                ReviewRating.EASY -> easyIntervals[stage]
+            }
+            val nextRecord = word + "|" + nextStage + "|" + (today + interval)
+            prefs[reviewCardsKey] = records.filterNot { it.substringBefore('|') == word }.toSet() + nextRecord
+            prefs[xpKey] = (prefs[xpKey] ?: 0) + when (rating) {
+                ReviewRating.AGAIN -> 1
+                ReviewRating.GOOD -> 3
+                ReviewRating.EASY -> 5
+            }
+            updateStudyStreak(prefs)
+        }
+    }
+
     private fun updateStudyStreak(prefs: androidx.datastore.preferences.core.MutablePreferences) {
         val today = LocalDate.now().toEpochDay()
         val previous = prefs[lastStudyDayKey] ?: -1L
-        val currentStreak = prefs[streakKey] ?: 0
+        val streak = prefs[streakKey] ?: 0
         if (previous != today) {
-            prefs[streakKey] = if (previous == today - 1) currentStreak + 1 else 1
+            prefs[streakKey] = if (previous == today - 1) streak + 1 else 1
             prefs[lastStudyDayKey] = today
         }
     }
