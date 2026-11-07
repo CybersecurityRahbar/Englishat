@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.englishat.app.data.LearningProgress
 import com.englishat.app.data.ProgressStore
+import com.englishat.app.data.ReviewRating
 import com.englishat.app.ui.EnglishatApp
 import com.englishat.app.ui.theme.EnglishatTheme
 import kotlinx.coroutines.launch
@@ -47,7 +48,8 @@ class MainActivity : ComponentActivity() {
                     onSpeak = ::speak,
                     onCompleteLesson = { id -> scope.launch { progressStore.completeLesson(id) } },
                     onToggleFavorite = { word -> scope.launch { progressStore.toggleFavorite(word) } },
-                    onPracticeCompleted = { correct -> scope.launch { progressStore.recordPractice(correct) } }
+                    onPracticeCompleted = { correct -> scope.launch { progressStore.recordPractice(correct) } },
+                    onReviewWord = { word, rating -> scope.launch { progressStore.recordReview(word, rating) } }
                 )
             }
         }
